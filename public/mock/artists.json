@@ -1,0 +1,118 @@
+[
+  {
+    "id": "artist1",
+    "name": "Gopal Saini",
+    "craft": "Blue Art Pottery",
+    "region": "Jaipur, Rajasthan",
+    "story": "Gopal Saini has spent over 25 years mastering Jaipur's iconic Blue Pottery, a craft that uses no clay at all — only quartz, glass, and natural dyes. He is a National Award recipient for his work, and one of a shrinking number of artisans keeping this centuries-old Persian-influenced technique alive.",
+    "badge": true,
+    "badgeReason": "Fewer than 200 artisans in Jaipur still practice authentic Blue Pottery",
+    "sessionModes": ["video", "in-person"],
+    "portrait": "images/artist1/portrait.jpg",
+    "boughtCount": 312,
+    "reviews": [
+      { "name": "Ritika Sharma", "text": "The vase I bought is stunning — and knowing it came straight from Gopal ji made it even more special.", "photo": "images/artist1/review1.jpg" },
+      { "name": "Aman Verma", "text": "Took a video session to learn basic glazing — patient teacher, incredible detail.", "photo": "images/artist1/review2.jpg" }
+    ],
+    "artworks": [
+      {
+        "id": "art1",
+        "title": "Blue Lotus Vase",
+        "image": "images/artist1/art1.jpg",
+        "price": 1800,
+        "hotspots": [
+          { "x": 30, "y": 35, "title": "The material", "text": "Made from quartz powder and glass — no clay is used at all in true Blue Pottery." },
+          { "x": 55, "y": 50, "title": "The pattern", "text": "The lotus motif is hand-painted using cobalt oxide, giving the signature deep blue color." },
+          { "x": 45, "y": 70, "title": "The firing", "text": "Fired at low temperature in a traditional kiln — too much heat and the piece cracks instantly." }
+        ]
+      },
+      {
+        "id": "art2",
+        "title": "Floral Blue Plate Set",
+        "image": "images/artist1/art2.jpg",
+        "price": 1200,
+        "hotspots": [
+          { "x": 40, "y": 40, "title": "The technique", "text": "Each plate is hand-molded, not wheel-thrown, using a mould-pressing method unique to this craft." },
+          { "x": 60, "y": 60, "title": "The colors", "text": "Only blue, green, and white were traditionally used — colors that stay vivid for decades." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "artist2",
+    "name": "Ambika Devi",
+    "craft": "Madhubani Painting",
+    "region": "Madhubani, Bihar",
+    "story": "Ambika Devi learned Madhubani painting from her mother, continuing a tradition passed down through generations of women in her village. A recipient of the National Handicrafts Award, her work often depicts nature, deities, and scenes of rural life using natural pigments made from turmeric, charcoal, and flowers.",
+    "badge": true,
+    "badgeReason": "Traditional natural-dye Madhubani art is increasingly replaced by synthetic paints; few artisans still use the original method",
+    "sessionModes": ["video", "in-person"],
+    "portrait": "images/artist2/portrait.jpg",
+    "boughtCount": 405,
+    "reviews": [
+      { "name": "Nikhil Rao", "text": "The colors are incredible — you can tell it's natural pigment, not printed.", "photo": "images/artist2/review1.jpg" },
+      { "name": "Sneha Iyer", "text": "Commissioned a custom piece for my mother's birthday — Ambika ji added a personal touch we didn't even ask for.", "photo": "images/artist2/review2.jpg" }
+    ],
+    "artworks": [
+      {
+        "id": "art1",
+        "title": "Peacock in the Garden",
+        "image": "images/artist2/art1.jpg",
+        "price": 1500,
+        "hotspots": [
+          { "x": 30, "y": 40, "title": "The pigment", "text": "Made from natural dyes — turmeric, charcoal, and flower extracts, not synthetic paint." },
+          { "x": 60, "y": 55, "title": "The pattern", "text": "The peacock motif symbolizes love and fertility in traditional Mithila culture." },
+          { "x": 45, "y": 75, "title": "The technique", "text": "Painted with a bamboo twig, not a brush — a method passed down through generations." }
+        ]
+      },
+      {
+        "id": "art2",
+        "title": "Tree of Life",
+        "image": "images/artist2/art2.jpg",
+        "price": 2200,
+        "hotspots": [
+          { "x": 50, "y": 30, "title": "The symbolism", "text": "The Tree of Life motif represents the connection between earth, humans, and the divine." },
+          { "x": 35, "y": 65, "title": "The border", "text": "The double-line border filled with fish and floral patterns is a signature Madhubani style." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "artist3",
+    "name": "Sita Devi",
+    "craft": "Lac Bangles",
+    "region": "Madhubani, Bihar",
+    "story": "Sita Devi is a State Award recipient known for handcrafted lac bangles, a craft involving heating natural lac resin and shaping it by hand while molten, then decorating it with mirrors, beads, and hand-painted motifs. Each piece takes hours of precise, heat-sensitive work.",
+    "badge": true,
+    "badgeReason": "Machine-made plastic bangles have sharply reduced demand for hand-shaped lac bangles",
+    "sessionModes": ["in-person"],
+    "portrait": "images/artist3/portrait.jpg",
+    "boughtCount": 178,
+    "reviews": [
+      { "name": "Priya Nair", "text": "So much detail in each bangle — you can feel the handwork.", "photo": "images/artist3/review1.jpg" },
+      { "name": "Divya Menon", "text": "Bought a set for my wedding — completely unique, nothing like store-bought ones.", "photo": "images/artist3/review2.jpg" }
+    ],
+    "artworks": [
+      {
+        "id": "art1",
+        "title": "Mirror-Work Bangle Set",
+        "image": "images/artist3/art1.jpg",
+        "price": 900,
+        "hotspots": [
+          { "x": 35, "y": 45, "title": "The material", "text": "Made from natural lac resin, heated and hand-shaped while still warm." },
+          { "x": 55, "y": 60, "title": "The decoration", "text": "Tiny mirrors and beads are pressed in by hand while the lac is still soft." }
+        ]
+      },
+      {
+        "id": "art2",
+        "title": "Festive Red & Gold Bangles",
+        "image": "images/artist3/art2.jpg",
+        "price": 750,
+        "hotspots": [
+          { "x": 40, "y": 40, "title": "The color", "text": "Natural dyes give the deep red tone traditionally worn during festivals and weddings." },
+          { "x": 60, "y": 65, "title": "The shaping", "text": "Each bangle is shaped by hand on a small metal rod — no molds are used." }
+        ]
+      }
+    ]
+  }
+]
