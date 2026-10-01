@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KalaSetu - Master Artist Profile</title>
+  <title>KalaSetu - Master Artist Profile & Product Story Card</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -29,14 +29,14 @@
       </div>
     </section>
 
-    <!-- SECTION: STORY CARD WITH DOTS (Flowchart Aligned) -->
+    <!-- SECTION: STORY CARD WITH DOTS & PRODUCT DETAILS -->
     <section id="story-card-section">
       <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
         <div>
           <span style="color: var(--gold); font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;">INTERACTIVE CRAFT EXPLORER</span>
-          <h2>STORY CARD WITH DOTS</h2>
+          <h2>PRODUCT DETAILS & STORY CARD</h2>
         </div>
-        <span style="color: var(--text-muted); font-size: 0.9rem;">Click the pulsing dots on the artwork to discover secret craft techniques</span>
+        <span style="color: var(--text-muted); font-size: 0.9rem;">Click the pulsing dots on the artwork to discover craft techniques & materials</span>
       </div>
 
       <div class="card" style="padding: 24px;">
@@ -48,34 +48,17 @@
 
     <!-- SECTION: ARTWORK GALLERY -->
     <section id="artist-portfolio">
-      <h2>Master Artworks</h2>
+      <h2>Master Artworks Catalog</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
+        Click any artwork card below to inspect its Product Details & Story Card with Hotspots above:
+      </p>
       <div id="artwork-list" class="bids-grid">
         <!-- Artwork cards loaded by artist.js -->
       </div>
     </section>
 
-    <!-- SECTION: BUY DIRECT + ORDER & SESSION -->
-    <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
-      
-      <!-- BUY DIRECT + ORDER -->
-      <div class="card" id="purchase-section" style="border-top: 4px solid var(--terracotta);">
-        <span class="role-badge" style="margin-bottom: 12px; display: inline-block;">BUY DIRECT + ORDER</span>
-        <h3>Direct Support & Purchase</h3>
-        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px;">
-          Purchase directly from the artisan. 100% of proceeds support heritage craft preservation.
-        </p>
-        <div style="background: rgba(255,255,255,0.03); padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.08); margin-bottom: 20px;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="color: var(--amber);">Artworks Collected:</span>
-            <strong id="bought-count" style="font-size: 1.2rem; color: var(--gold);">0</strong>
-          </div>
-        </div>
-        <button class="btn btn-primary" id="buy-button" style="width: 100%; justify-content: center; font-size: 1rem;">
-          🛒 BUY DIRECT & PLACE ORDER &rarr;
-        </button>
-      </div>
-
-      <!-- SESSION -->
+    <!-- SECTION: SESSION -->
+    <section style="margin-top: 40px;">
       <div class="card" id="session-section" style="border-top: 4px solid var(--gold);">
         <span class="role-badge" style="background: var(--gold); color: #000; margin-bottom: 12px; display: inline-block;">SESSION</span>
         <h3>Book Artisan Session</h3>
@@ -87,7 +70,6 @@
         </div>
         <p id="session-status" style="margin-top: 12px; font-weight: 600; color: var(--gold);"></p>
       </div>
-
     </section>
 
     <!-- BUYER REVIEWS / STORIES -->
@@ -100,13 +82,13 @@
 
   </main>
 
-  <!-- ORDER RETURN MODAL (BUY DIRECT + ORDER -> RETURN) -->
+  <!-- ORDER RETURN MODAL (ONLY OPENED AFTER EXPLICIT BUY CLICK) -->
   <div id="order-modal" class="modal hidden">
     <div class="modal-box">
       <div style="font-size: 3rem; margin-bottom: 12px;">🎉</div>
       <h2 style="border: none; padding: 0; margin-bottom: 8px;">Order Placed Successfully!</h2>
       <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
-        Thank you for directly supporting heritage Indian craft. Your order details have been recorded.
+        Thank you for purchasing <strong style="color: var(--gold);" id="modal-order-item-title">Artwork</strong> (<span id="modal-order-item-price">₹0</span>). Your order details have been recorded.
       </p>
 
       <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; border-radius: var(--radius-sm); padding: 16px; text-align: left; margin-bottom: 24px;">
