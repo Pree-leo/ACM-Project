@@ -10,7 +10,7 @@ const GEMINI_MODEL = 'gemini-3.8-flash'; // tested with your key, don't swap
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ---------- Data ----------
@@ -189,6 +189,58 @@ app.post('/api/discover', async (req, res) => {
   res.set('X-Source', 'fallback');
   res.json(fallbackMatch(query));
 });
+
+
+// ---------- Auto-tag artwork (Gemini vision) ----------
+const MIME = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' };
+
+function fallbackTags(artworkId) {
+  const w = allArtworks().find(x => x.id === artworkId);
+  if (!w) return { tags: ['handmade', 'indian craft', 'traditional'], mood: 'warm', source: 'fallback' };
+  return {
+    tags: [w.craft.toLowerCase(), w.region.toLowerCase(), 'handmade', 'traditional'],
+    mood: 'warm',
+    source: 'fallback'
+  };
+}
+
+// Body: { artworkId } (tags an existing image)  OR  { image: "<base64>", mimeType: "image/jpeg" } (new upload)
+app.post('/api/tag', async (req, res) => {
+  const { artworkId, image, mimeType } = req.body;
+  try {
+    let data = image, mime = mimeType;
+    if (!data && artworkId) {
+      const w = allArtworks().find(x => x.id === artworkId);
+      if (!w) return res.status(404).json({ error: 'Artwork not found' });
+      const filePath = path.join(__dirname, 'public', w.image);
+      data = fs.readFileSync(filePath).toString('base64');
+      mime = MIME[path.extname(filePath).toLowerCase()] || 'image/jpeg';
+    }
+    if (!data) return res.status(400).json({ error: 'artworkId or image required' });
+
+    const prompt = `You are cataloguing Indian folk art and craft for KalaSetu.
+Look at this artwork image and respond with ONLY a JSON object:
+{"tags": [5 to 7 short lowercase descriptive tags],
+ "mood": "one or two words for the feeling it evokes",
+ "craftGuess": "the likely art form or craft",
+ "description": "one warm sentence describing it"}`;
+
+    const call = ai.models.generateContent({
+      model: GEMINI_MODEL,
+      contents: [{ inlineData: { mimeType: mime, data } }, { text: prompt }],
+      config: { responseMimeType: 'application/json' }
+    });
+    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('Gemini timeout')), 8000));
+    const response = await Promise.race([call, timeout]);
+    const parsed = JSON.parse(response.text.replace(/```json|```/g, '').trim());
+    console.log('[tag] Gemini ok');
+    res.json({ ...parsed, source: 'gemini' });
+  } catch (err) {
+    console.warn(`[tag] Gemini failed (${err.message}), using fallback`);
+    res.json(fallbackTags(artworkId));
+  }
+});
+
 
 // ---------- Start ----------
 app.listen(PORT, '0.0.0.0', () => {
