@@ -199,5 +199,5 @@ Zero-commission sales. Revenue comes from session-booking fees and optional prem
 
 ## Team
 
-Snigdha S Shetty
+Snigdha S Shetty,
 Preethika
