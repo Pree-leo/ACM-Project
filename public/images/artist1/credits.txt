@@ -1,0 +1,32 @@
+ARTIST 1 — BLUE ART POTTERY
+IMAGE CREDITS
+
+art1.jpg
+Source: https://commons.wikimedia.org/wiki/File:Jaipur_Blue_Pottery_Vase_with_Raja-Rani_Design.jpg
+Creator: Neek-Theri
+License: CC BY-SA 4.0
+Changes: Cropped to 1:1 and resized to approximately 1600 × 1600 px.
+
+art2.jpg
+Source: https://commons.wikimedia.org/wiki/File:Blue_Pottery_Dholak,_Jaipur.jpg
+Creator: Neek-Theri
+License: CC BY-SA 4.0
+Changes: Cropped to 1:1 and resized to approximately 1600 × 1600 px.
+
+portrait.jpg
+Source: https://commons.wikimedia.org/wiki/File:Blue_Pottery_painted_object.jpg
+Creator: Neek-Theri
+License: CC BY-SA 4.0
+Changes: Cropped to 1:1 and resized to approximately 1600 × 1600 px.
+
+review1.jpg
+Source: https://commons.wikimedia.org/wiki/File:Blue_Pottery_Making_Process.jpg
+Creator: Neek-Theri
+License: CC BY-SA 4.0
+Changes: Cropped to 1:1 and resized to approximately 1600 × 1600 px.
+
+review2.jpg
+Source: https://commons.wikimedia.org/wiki/File:Blue_Pottery_Designer_Vase.jpg
+Creator: Neek-Theri
+License: CC BY-SA 4.0
+Changes: Cropped to 1:1 and resized to approximately 1600 × 1600 px.

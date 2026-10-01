@@ -1,0 +1,32 @@
+ARTIST 2 — MADHUBANI PAINTING
+IMAGE CREDITS
+
+art1.jpg
+Source: https://commons.wikimedia.org/wiki/File:Asha_Jha_Artist_Madhubani_Painting.jpg
+Creator: Alok Kriti
+License: CC0 1.0
+Changes: Cropped to 1:1 and resized to approximately 1600 × 1600 px.
+
+art2.jpg
+Source: https://commons.wikimedia.org/wiki/File:Madhubani_painting_at_Koci.jpg
+Creator: Chiring chandan
+License: CC BY-SA 4.0
+Changes: Cropped to 1:1 and resized to approximately 1600 × 1600 px.
+
+portrait.jpg
+Source: https://commons.wikimedia.org/wiki/File:Madhubani_Painting_2.jpg
+Creator: Sarcastic_Speedster
+License: CC BY-SA 4.0
+Changes: Cropped to 1:1 and resized to approximately 1600 × 1600 px.
+
+review1.jpg
+Source: https://commons.wikimedia.org/wiki/File:Madhubani_painting,_Bihar.jpg
+Creator: Jean-Etienne Minh-Duy Poirrier
+License: CC BY-SA 2.0
+Changes: Cropped to 1:1 and resized to approximately 1600 × 1600 px.
+
+review2.jpg
+Source: https://commons.wikimedia.org/wiki/File:Madhubani_Painting_of_Ram_-_Sita_Vivah.jpg
+Creator: Suyash Dwivedi
+License: CC BY-SA 4.0
+Changes: Cropped to 1:1 and resized to approximately 1600 × 1600 px.
