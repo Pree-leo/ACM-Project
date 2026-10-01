@@ -1,1475 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>KalaSetu - Artist Dashboard</title>
-
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KalaSetu - Master Artisan Portal</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-    <!-- Navigation Bar -->
-    <nav class="nav">
-
-        <a href="artist-dashboard.html">
-            <strong>KalaSetu</strong>
-        </a>
-
-        <a href="artist-dashboard.html">
-            Dashboard
-        </a>
-
-        <a href="buyer.html">
-            Buyer Marketplace
-        </a>
-
-        <a href="index.html">
-            Switch Role
-        </a>
-
-        <span class="coins">
-            Artist Portal
-        </span>
-
-    </nav>
-
-
-    <main>
-
-        <!-- =========================================
-             ARTIST ACCESS
-        ========================================== -->
-
-        <section id="artist-access">
-
-            <h1>Artist Portal</h1>
-
-            <p>
-                Sign in to manage your KalaSetu artist profile,
-                or create a new artist account.
-            </p>
-
-
-            <!-- Sign In -->
-            <div id="artist-login-section">
-
-                <h2>Artist Sign In</h2>
-
-                <form id="artist-login-form">
-
-                    <label for="login-email">
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="login-email"
-                        placeholder="Enter your email"
-                        required
-                    >
-
-
-                    <label for="login-password">
-                        Password
-                    </label>
-
-                    <input
-                        type="password"
-                        id="login-password"
-                        placeholder="Enter your password"
-                        required
-                    >
-
-
-                    <button
-                        type="submit"
-                        class="buy-btn"
-                    >
-                        Sign In
-                    </button>
-
-                </form>
-
-
-                <p id="login-message"></p>
-
-
-                <p>
-                    New to KalaSetu?
-                    <button
-                        type="button"
-                        class="link-btn"
-                        id="show-register-button"
-                    >
-                        Create New Artist Account
-                    </button>
-                </p>
-
-            </div>
-
-
-            <!-- New Artist Registration -->
-            <div
-                id="artist-register-section"
-                class="hidden"
-            >
-
-                <h2>New Artist Registration</h2>
-
-                <p>
-                    Create your artist profile and join
-                    the KalaSetu marketplace.
-                </p>
-
-
-                <form id="artist-register-form">
-
-                    <label for="register-name">
-                        Artist Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="register-name"
-                        placeholder="Enter your artist name"
-                        required
-                    >
-
-
-                    <label for="register-email">
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="register-email"
-                        placeholder="Enter your email"
-                        required
-                    >
-
-
-                    <label for="register-password">
-                        Password
-                    </label>
-
-                    <input
-                        type="password"
-                        id="register-password"
-                        placeholder="Create a password"
-                        required
-                    >
-
-
-                    <label for="register-craft">
-                        Craft / Art Form
-                    </label>
-
-                    <input
-                        type="text"
-                        id="register-craft"
-                        placeholder="Example: Madhubani Painting"
-                        required
-                    >
-
-
-                    <label for="register-region">
-                        Region
-                    </label>
-
-                    <input
-                        type="text"
-                        id="register-region"
-                        placeholder="Example: Bihar, India"
-                        required
-                    >
-
-
-                    <label for="register-story">
-                        Artist Story
-                    </label>
-
-                    <textarea
-                        id="register-story"
-                        rows="5"
-                        placeholder="Tell buyers about your artistic journey..."
-                        required
-                    ></textarea>
-
-
-                    <label>
-                        Available Session Modes
-                    </label>
-
-
-                    <div>
-
-                        <label>
-                            <input
-                                type="checkbox"
-                                id="register-video"
-                                value="video"
-                            >
-                            Video Session
-                        </label>
-
-
-                        <label>
-                            <input
-                                type="checkbox"
-                                id="register-inperson"
-                                value="inperson"
-                            >
-                            In-Person Session
-                        </label>
-
-                    </div>
-
-
-                    <button
-                        type="submit"
-                        class="buy-btn"
-                    >
-                        Create Artist Account
-                    </button>
-
-                </form>
-
-
-                <p id="register-message"></p>
-
-
-                <button
-                    type="button"
-                    class="link-btn"
-                    id="show-login-button"
-                >
-                    Already have an account? Sign In
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================================
-             DASHBOARD
-        ========================================== -->
-
-        <section
-            id="dashboard-section"
-            class="hidden"
-        >
-
-            <h1>Artist Dashboard</h1>
-
-            <p id="welcome-message"></p>
-
-
-            <!-- Logout -->
-            <button
-                type="button"
-                class="link-btn"
-                id="logout-button"
-            >
-                Sign Out
+  <!-- Navigation Bar -->
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">✨ KALASETU</a>
+    <div class="nav-links">
+      <a href="artist-dashboard.html" class="active">Artist Portal</a>
+      <a href="buyer.html">Buyer View</a>
+      <span class="role-badge" style="background: var(--gold); color: #000;">ARTISAN MODE</span>
+      <a href="index.html" class="link-btn">Switch Role</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <div style="margin-bottom: 30px;">
+      <span style="color: var(--gold); font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;">ARTISAN PIPELINE</span>
+      <h1>ARTIST DASHBOARD</h1>
+      <p class="lead">
+        View incoming buyer commission requests, submit concept sketch bids, track decision status, and view won agreements.
+      </p>
+    </div>
+
+    <!-- ARTIST SELECTOR / LOGIN SIMULATOR -->
+    <div class="card" style="margin-bottom: 40px; border-left: 4px solid var(--gold);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <h3 style="margin: 0; color: var(--gold);">Logged in Artisan Profile</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Switch profile to test bidding as different master artisans:</p>
+        </div>
+        <select id="artisan-profile-select" style="max-width: 280px; background: rgba(15,23,42,0.9); border-color: var(--gold); color: var(--amber); font-weight: 600;">
+          <option value="artist1" selected>Gopal Saini (Blue Art Pottery Specialist)</option>
+          <option value="artist2">Ambika Devi (Madhubani Painting Specialist)</option>
+          <option value="artist3">Sita Devi (Lac Bangles Specialist)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- FLOWCHART SECTION 1: ARTIST REQUESTS -->
+    <section>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div>
+          <span class="role-badge" style="background: var(--gold); color: #000;">STEP 1</span>
+          <h2 style="display: inline-block; margin-left: 10px; border: none; padding: 0;">ARTIST REQUESTS</h2>
+        </div>
+        <button class="btn btn-secondary" id="refresh-requests-btn" style="padding: 6px 14px; font-size: 0.85rem;">
+          🔄 Refresh Requests
+        </button>
+      </div>
+
+      <div id="requests-list-container">
+        <!-- Rendered by inline script -->
+      </div>
+    </section>
+
+    <!-- BID MODAL (BID WITH SKETCH) -->
+    <div id="bid-modal" class="modal hidden">
+      <div class="modal-box" style="text-align: left;">
+        <span class="role-badge" style="margin-bottom: 12px; display: inline-block;">STEP 2: BID WITH SKETCH</span>
+        <h2 style="border: none; padding: 0; margin-bottom: 8px;">Submit Artisan Bid & Concept Sketch</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;" id="bid-modal-subtitle">
+          Propose your custom price, turnaround timeline, and craft approach.
+        </p>
+
+        <form id="artisan-bid-form">
+          <input type="hidden" id="bid-request-id">
+
+          <div>
+            <label for="bid-proposed-price">Proposed Price (₹)</label>
+            <input type="number" id="bid-proposed-price" value="2600" required>
+          </div>
+
+          <div>
+            <label for="bid-days">Estimated Turnaround Days</label>
+            <input type="number" id="bid-days" value="8" required>
+          </div>
+
+          <div>
+            <label for="bid-sketch-note">Concept Sketch Note (Craft Technique & Dye Approach)</label>
+            <textarea id="bid-sketch-note" rows="4" placeholder="E.g., I will hand-draw this concept on handmade canvas using natural turmeric yellow and indigo blue pigments..." required></textarea>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 12px;">
+            <button type="submit" class="btn btn-primary" style="flex: 1; justify-content: center;">
+              🚀 Submit Bid & Sketch &rarr;
             </button>
-
-
-            <!-- Artist Selector -->
-            <section>
-
-                <h2>Select Artist Profile</h2>
-
-                <select id="artist-selector">
-
-                    <option value="">
-                        Loading artists...
-                    </option>
-
-                </select>
-
-            </section>
-
-
-            <!-- Artist Profile -->
-            <section id="dashboard-profile">
-
-                <h2>My Profile</h2>
-
-                <div id="profile-content">
-
-                    <p>
-                        Select an artist to view the profile.
-                    </p>
-
-                </div>
-
-            </section>
-
-
-            <!-- Portfolio -->
-            <section id="dashboard-portfolio">
-
-                <h2>My Portfolio</h2>
-
-                <div
-                    id="portfolio-content"
-                    class="portfolio"
-                >
-
-                    <p>
-                        Select an artist to view the portfolio.
-                    </p>
-
-                </div>
-
-            </section>
-
-
-            <!-- Session Availability -->
-            <section id="dashboard-sessions">
-
-                <h2>Session Availability</h2>
-
-                <p>
-                    These are the ways buyers can connect
-                    with the artist.
-                </p>
-
-                <div id="session-content">
-
-                    <p>
-                        Select an artist to view session options.
-                    </p>
-
-                </div>
-
-            </section>
-
-
-            <!-- Commission Requests -->
-            <section id="dashboard-commissions">
-
-                <h2>Commission Requests</h2>
-
-                <div id="commission-content">
-
-                    <p>
-                        Commission requests from buyers
-                        will appear here.
-                    </p>
-
-                    <p>
-                        No pending requests yet.
-                    </p>
-
-                </div>
-
-            </section>
-
-        </section>
-
-    </main>
-
-
-    <script src="js/main.js"></script>
-
-
-    <script>
-
-        /*
-         * =========================================
-         * ELEMENTS
-         * =========================================
-         */
-
-        const loginSection =
-            document.getElementById(
-                'artist-login-section'
-            );
-
-        const registerSection =
-            document.getElementById(
-                'artist-register-section'
-            );
-
-        const dashboardSection =
-            document.getElementById(
-                'dashboard-section'
-            );
-
-        const loginForm =
-            document.getElementById(
-                'artist-login-form'
-            );
-
-        const registerForm =
-            document.getElementById(
-                'artist-register-form'
-            );
-
-        const loginMessage =
-            document.getElementById(
-                'login-message'
-            );
-
-        const registerMessage =
-            document.getElementById(
-                'register-message'
-            );
-
-        const artistSelector =
-            document.getElementById(
-                'artist-selector'
-            );
-
-        const profileContent =
-            document.getElementById(
-                'profile-content'
-            );
-
-        const portfolioContent =
-            document.getElementById(
-                'portfolio-content'
-            );
-
-        const sessionContent =
-            document.getElementById(
-                'session-content'
-            );
-
-        const welcomeMessage =
-            document.getElementById(
-                'welcome-message'
-            );
-
-
-        let artists = [];
-
-
-        /*
-         * =========================================
-         * LOCAL ARTIST ACCOUNTS
-         * =========================================
-         */
-
-        function getRegisteredArtists() {
-
-            const stored =
-                localStorage.getItem(
-                    'ks_registered_artists'
-                );
-
-            if (!stored) {
-                return [];
-            }
-
-            try {
-
-                return JSON.parse(
-                    stored
-                );
-
-            } catch (error) {
-
-                return [];
-
-            }
-
+            <button type="button" class="btn btn-secondary" id="close-bid-modal" style="width: 100px;">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const profileSelect = document.getElementById('artisan-profile-select');
+      const requestsContainer = document.getElementById('requests-list-container');
+      const refreshBtn = document.getElementById('refresh-requests-btn');
+      const bidModal = document.getElementById('bid-modal');
+      const bidForm = document.getElementById('artisan-bid-form');
+
+      let allCommissions = [];
+
+      refreshBtn.addEventListener('click', fetchCommissions);
+      profileSelect.addEventListener('change', fetchCommissions);
+
+      async function fetchCommissions() {
+        requestsContainer.innerHTML = `
+          <div class="card" style="text-align: center; padding: 30px;">
+            <p style="color: var(--gold);">Fetching active buyer commission requests...</p>
+          </div>
+        `;
+
+        try {
+          const res = await fetch('/api/commissions');
+          allCommissions = await res.json();
+          renderRequests();
+        } catch (err) {
+          requestsContainer.innerHTML = '<div class="card"><p style="color:#ef4444;">Unable to load requests.</p></div>';
+        }
+      }
+
+      function renderRequests() {
+        const currentArtisanId = profileSelect.value;
+        const currentArtisanName = profileSelect.options[profileSelect.selectedIndex].text.split(' (')[0];
+
+        if (!allCommissions || allCommissions.length === 0) {
+          requestsContainer.innerHTML = `
+            <div class="card" style="text-align: center; padding: 40px; border-top: 4px solid var(--gold);">
+              <h3>No Active Commission Requests Yet</h3>
+              <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
+                Buyer commission requests submitted from the marketplace will appear here automatically.
+              </p>
+              <a href="commission.html" class="btn btn-secondary">
+                ✨ Submit a Sample Buyer Request to Test &rarr;
+              </a>
+            </div>
+          `;
+          return;
         }
 
-
-        function saveRegisteredArtists(
-            registeredArtists
-        ) {
-
-            localStorage.setItem(
-                'ks_registered_artists',
-                JSON.stringify(
-                    registeredArtists
-                )
-            );
-
-        }
-
-
-        /*
-         * =========================================
-         * SHOW LOGIN / REGISTER
-         * =========================================
-         */
-
-        document
-            .getElementById(
-                'show-register-button'
-            )
-            .addEventListener(
-                'click',
-                function () {
-
-                    loginSection.classList.add(
-                        'hidden'
-                    );
-
-                    registerSection.classList.remove(
-                        'hidden'
-                    );
-
-                    loginMessage.textContent = '';
-
-                }
-            );
-
-
-        document
-            .getElementById(
-                'show-login-button'
-            )
-            .addEventListener(
-                'click',
-                function () {
-
-                    registerSection.classList.add(
-                        'hidden'
-                    );
-
-                    loginSection.classList.remove(
-                        'hidden'
-                    );
-
-                    registerMessage.textContent = '';
-
-                }
-            );
-
-
-        /*
-         * =========================================
-         * REGISTER NEW ARTIST
-         * =========================================
-         */
-
-        registerForm.addEventListener(
-            'submit',
-            function (event) {
-
-                event.preventDefault();
-
-
-                const name =
-                    document
-                        .getElementById(
-                            'register-name'
-                        )
-                        .value
-                        .trim();
-
-                const email =
-                    document
-                        .getElementById(
-                            'register-email'
-                        )
-                        .value
-                        .trim()
-                        .toLowerCase();
-
-                const password =
-                    document
-                        .getElementById(
-                            'register-password'
-                        )
-                        .value;
-
-                const craft =
-                    document
-                        .getElementById(
-                            'register-craft'
-                        )
-                        .value
-                        .trim();
-
-                const region =
-                    document
-                        .getElementById(
-                            'register-region'
-                        )
-                        .value
-                        .trim();
-
-                const story =
-                    document
-                        .getElementById(
-                            'register-story'
-                        )
-                        .value
-                        .trim();
-
-
-                const sessionModes = [];
-
-
-                if (
-                    document
-                        .getElementById(
-                            'register-video'
-                        )
-                        .checked
-                ) {
-
-                    sessionModes.push(
-                        'video'
-                    );
-
-                }
-
-
-                if (
-                    document
-                        .getElementById(
-                            'register-inperson'
-                        )
-                        .checked
-                ) {
-
-                    sessionModes.push(
-                        'inperson'
-                    );
-
-                }
-
-
-                const registeredArtists =
-                    getRegisteredArtists();
-
-
-                const existingArtist =
-                    registeredArtists.find(
-                        artist =>
-                            artist.email === email
-                    );
-
-
-                if (existingArtist) {
-
-                    registerMessage.textContent =
-                        'An account with this email already exists.';
-
-                    return;
-
-                }
-
-
-                const newArtist = {
-
-                    id:
-                        'new-' +
-                        Date.now(),
-
-                    name,
-
-                    email,
-
-                    password,
-
-                    craft,
-
-                    region,
-
-                    story,
-
-                    badge:
-                        'New KalaSetu Artist',
-
-                    sessionModes,
-
-                    artworks: []
-
-                };
-
-
-                registeredArtists.push(
-                    newArtist
-                );
-
-
-                saveRegisteredArtists(
-                    registeredArtists
-                );
-
-
-                /*
-                 * Automatically sign in
-                 */
-                localStorage.setItem(
-                    'ks_artist_session',
-                    JSON.stringify(
-                        newArtist
-                    )
-                );
-
-
-                registerMessage.textContent =
-                    'Artist account created successfully!';
-
-
-                setTimeout(
-                    function () {
-
-                        showDashboard(
-                            newArtist
-                        );
-
-                    },
-                    500
-                );
-
-            }
-        );
-
-
-        /*
-         * =========================================
-         * ARTIST LOGIN
-         * =========================================
-         */
-
-        loginForm.addEventListener(
-            'submit',
-            function (event) {
-
-                event.preventDefault();
-
-
-                const email =
-                    document
-                        .getElementById(
-                            'login-email'
-                        )
-                        .value
-                        .trim()
-                        .toLowerCase();
-
-                const password =
-                    document
-                        .getElementById(
-                            'login-password'
-                        )
-                        .value;
-
-
-                const registeredArtists =
-                    getRegisteredArtists();
-
-
-                const artist =
-                    registeredArtists.find(
-                        item =>
-                            item.email === email &&
-                            item.password === password
-                    );
-
-
-                if (!artist) {
-
-                    loginMessage.textContent =
-                        'Invalid email or password.';
-
-                    return;
-
-                }
-
-
-                localStorage.setItem(
-                    'ks_artist_session',
-                    JSON.stringify(
-                        artist
-                    )
-                );
-
-
-                loginMessage.textContent =
-                    'Sign in successful!';
-
-
-                showDashboard(
-                    artist
-                );
-
-            }
-        );
-
-
-        /*
-         * =========================================
-         * SHOW DASHBOARD
-         * =========================================
-         */
-
-        function showDashboard(
-            loggedInArtist
-        ) {
-
-            loginSection.classList.add(
-                'hidden'
-            );
-
-            registerSection.classList.add(
-                'hidden'
-            );
-
-            dashboardSection.classList.remove(
-                'hidden'
-            );
-
-
-            welcomeMessage.textContent =
-                `Welcome, ${loggedInArtist.name}!`;
-
-
-            loadArtists(
-                loggedInArtist
-            );
-
-        }
-
-
-        /*
-         * =========================================
-         * LOGOUT
-         * =========================================
-         */
-
-        document
-            .getElementById(
-                'logout-button'
-            )
-            .addEventListener(
-                'click',
-                function () {
-
-                    localStorage.removeItem(
-                        'ks_artist_session'
-                    );
-
-
-                    dashboardSection.classList.add(
-                        'hidden'
-                    );
-
-                    loginSection.classList.remove(
-                        'hidden'
-                    );
-
-
-                    loginForm.reset();
-
-                    registerForm.reset();
-
-                    loginMessage.textContent =
-                        'You have been signed out.';
-
-                }
-            );
-
-
-        /*
-         * =========================================
-         * LOAD ARTISTS
-         * =========================================
-         */
-
-        async function loadArtists(
-            loggedInArtist
-        ) {
-
-            try {
-
-                const response =
-                    await fetch(
-                        '/api/artists'
-                    );
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        'Unable to load artists'
-                    );
-
-                }
-
-
-                const apiArtists =
-                    await response.json();
-
-
-                const registeredArtists =
-                    getRegisteredArtists();
-
-
-                /*
-                 * Combine backend artists
-                 * with newly registered artists.
-                 */
-                artists = [
-                    ...apiArtists,
-                    ...registeredArtists
-                ];
-
-
-                artistSelector.innerHTML =
-                    '<option value="">Select an artist</option>';
-
-
-                artists.forEach(
-                    artist => {
-
-                        const option =
-                            document.createElement(
-                                'option'
-                            );
-
-                        option.value =
-                            artist.id;
-
-                        option.textContent =
-                            artist.name;
-
-                        artistSelector.appendChild(
-                            option
-                        );
-
-                    }
-                );
-
-
-                /*
-                 * Automatically select
-                 * logged-in artist.
-                 */
-                if (loggedInArtist) {
-
-                    artistSelector.value =
-                        loggedInArtist.id;
-
-
-                    loadArtist(
-                        loggedInArtist.id
-                    );
-
-                }
-
-            } catch (error) {
-
-                console.error(error);
-
-
-                /*
-                 * Even if API fails,
-                 * show locally registered artists.
-                 */
-                const registeredArtists =
-                    getRegisteredArtists();
-
-
-                artists =
-                    registeredArtists;
-
-
-                artistSelector.innerHTML =
-                    '<option value="">Select an artist</option>';
-
-
-                artists.forEach(
-                    artist => {
-
-                        const option =
-                            document.createElement(
-                                'option'
-                            );
-
-                        option.value =
-                            artist.id;
-
-                        option.textContent =
-                            artist.name;
-
-                        artistSelector.appendChild(
-                            option
-                        );
-
-                    }
-                );
-
-
-                if (loggedInArtist) {
-
-                    artistSelector.value =
-                        loggedInArtist.id;
-
-                    loadArtist(
-                        loggedInArtist.id
-                    );
-
-                }
-
-            }
-
-        }
-
-
-        /*
-         * =========================================
-         * LOAD SELECTED ARTIST
-         * =========================================
-         */
-
-        async function loadArtist(
-            artistId
-        ) {
-
-            if (!artistId) {
-
-                profileContent.innerHTML =
-                    '<p>Select an artist to view the profile.</p>';
-
-                portfolioContent.innerHTML =
-                    '<p>Select an artist to view the portfolio.</p>';
-
-                sessionContent.innerHTML =
-                    '<p>Select an artist to view session options.</p>';
-
-                return;
-
-            }
-
-
-            /*
-             * Check locally registered artists first.
-             */
-            const localArtist =
-                artists.find(
-                    artist =>
-                        artist.id === artistId
-                );
-
-
-            if (
-                localArtist &&
-                String(artistId).startsWith(
-                    'new-'
-                )
-            ) {
-
-                renderProfile(
-                    localArtist
-                );
-
-                renderPortfolio(
-                    localArtist
-                );
-
-                renderSessions(
-                    localArtist
-                );
-
-                return;
-
-            }
-
-
-            /*
-             * Otherwise load from backend.
-             */
-            try {
-
-                const response =
-                    await fetch(
-                        `/api/artists/${artistId}`
-                    );
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        'Unable to load artist'
-                    );
-
-                }
-
-
-                const artist =
-                    await response.json();
-
-
-                renderProfile(
-                    artist
-                );
-
-                renderPortfolio(
-                    artist
-                );
-
-                renderSessions(
-                    artist
-                );
-
-            } catch (error) {
-
-                console.error(error);
-
-
-                profileContent.innerHTML =
-                    '<p>Unable to load artist profile.</p>';
-
-                portfolioContent.innerHTML =
-                    '<p>Unable to load portfolio.</p>';
-
-                sessionContent.innerHTML =
-                    '<p>Unable to load session information.</p>';
-
-            }
-
-        }
-
-
-        /*
-         * =========================================
-         * RENDER PROFILE
-         * =========================================
-         */
-
-        function renderProfile(
-            artist
-        ) {
-
-            const portrait =
-                artist.portrait ||
-                (
-                    artist.artworks &&
-                    artist.artworks.length > 0
-                        ? artist.artworks[0].image
-                        : null
-                );
-
-
-            profileContent.innerHTML = `
-
-                <div class="artist-hero">
-
-                    ${
-                        portrait
-                            ? `
-                                <div>
-
-                                    <img
-                                        src="/${portrait}"
-                                        alt="${artist.name}"
-                                        class="portrait"
-                                    >
-
-                                </div>
-                            `
-                            : ''
-                    }
-
-
+        requestsContainer.innerHTML = `
+          <div style="display: grid; gap: 24px;">
+            ${allCommissions.map(c => {
+              // Check status relative to flowchart
+              const myBid = (c.bids || []).find(b => b.artistId === currentArtisanId);
+              const isSelected = c.selectedBid && c.selectedBid.artistId === currentArtisanId;
+              const isAgreed = c.agreed && isSelected;
+
+              let statusBadge = `<span class="role-badge" style="background: var(--gold); color: #000;">1. REQUEST OPEN</span>`;
+              if (isAgreed) {
+                statusBadge = `<span class="role-badge" style="background: #10b981; color: #fff;">4. WON & AGREED ✨</span>`;
+              } else if (isSelected) {
+                statusBadge = `<span class="role-badge" style="background: #10b981; color: #fff;">3. BID PICKED BY BUYER!</span>`;
+              } else if (myBid) {
+                statusBadge = `<span class="role-badge" style="background: var(--terracotta); color: #fff;">2. WAIT (Awaiting Buyer Decision)</span>`;
+              }
+
+              const sketch = c.aiSketch || {};
+
+              return `
+                <div class="card" style="border-left: 4px solid ${isAgreed ? '#10b981' : (myBid ? 'var(--terracotta)' : 'var(--gold)')};">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
                     <div>
-
-                        <h2>
-                            ${artist.name}
-                        </h2>
-
-                        <p>
-                            <strong>Craft:</strong>
-                            ${artist.craft || 'Not specified'}
-                        </p>
-
-                        <p>
-                            <strong>Region:</strong>
-                            ${artist.region || 'Not specified'}
-                        </p>
-
-                        ${
-                            artist.badge
-                                ? `
-                                    <p>
-                                        <span class="badge">
-                                            ${artist.badge}
-                                        </span>
-                                    </p>
-                                `
-                                : ''
-                        }
-
-                        ${
-                            artist.story
-                                ? `
-                                    <p>
-                                        ${artist.story}
-                                    </p>
-                                `
-                                : ''
-                        }
-
+                      ${statusBadge}
+                      <h3 style="margin: 8px 0 4px; font-size: 1.4rem;">Request #${c.requestId}: ${escapeHtml(sketch.title || 'Custom Artwork')}</h3>
+                      <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        👤 Buyer: <strong>${escapeHtml(c.buyerName)}</strong> &bull; 🗓️ Submitted: ${new Date(c.createdAt || Date.now()).toLocaleDateString()}
+                      </p>
                     </div>
+                    <span style="color: var(--gold); font-weight: 700; font-size: 1.1rem;">
+                      ${escapeHtml(sketch.estimatedPriceRange || '₹2,200 - ₹3,500')}
+                    </span>
+                  </div>
 
-                </div>
-
-            `;
-
-        }
-
-
-        /*
-         * =========================================
-         * RENDER PORTFOLIO
-         * =========================================
-         */
-
-        function renderPortfolio(
-            artist
-        ) {
-
-            if (
-                !artist.artworks ||
-                artist.artworks.length === 0
-            ) {
-
-                portfolioContent.innerHTML = `
-
-                    <p>
-                        No artworks added yet.
+                  <div style="background: rgba(15,23,42,0.8); border: 1px solid var(--bg-card-border); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px;">
+                    <div style="color: var(--amber); font-weight: 600; margin-bottom: 4px;">Buyer Description:</div>
+                    <p style="color: var(--text-main); font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px;">
+                      "${escapeHtml(c.description)}"
                     </p>
+                    ${sketch.concept ? `
+                      <div style="color: var(--gold); font-size: 0.85rem; font-weight: 600; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px;">
+                        ✨ AI Concept: ${escapeHtml(sketch.concept)}
+                      </div>
+                    ` : ''}
+                  </div>
 
-                    <p>
-                        Your portfolio can be added
-                        in the next development step.
-                    </p>
-
-                `;
-
-                return;
-
-            }
-
-
-            portfolioContent.innerHTML =
-                artist.artworks
-                    .map(
-                        artwork => {
-
-                            return `
-
-                                <article class="art-card">
-
-                                    <img
-                                        src="/${artwork.image}"
-                                        alt="${artwork.title}"
-                                    >
-
-                                    <h3>
-                                        ${artwork.title}
-                                    </h3>
-
-                                    ${
-                                        artwork.description
-                                            ? `
-                                                <p>
-                                                    ${artwork.description}
-                                                </p>
-                                            `
-                                            : ''
-                                    }
-
-                                    ${
-                                        artwork.price
-                                            ? `
-                                                <p>
-                                                    <strong>
-                                                        ₹${artwork.price}
-                                                    </strong>
-                                                </p>
-                                            `
-                                            : ''
-                                    }
-
-                                </article>
-
-                            `;
-
-                        }
-                    )
-                    .join('');
-
-        }
-
-
-        /*
-         * =========================================
-         * RENDER SESSIONS
-         * =========================================
-         */
-
-        function renderSessions(
-            artist
-        ) {
-
-            const modes =
-                artist.sessionModes || [];
-
-
-            if (modes.length === 0) {
-
-                sessionContent.innerHTML =
-                    '<p>No session modes currently available.</p>';
-
-                return;
-
-            }
-
-
-            const labels = {
-
-                video:
-                    'Video Session',
-
-                inperson:
-                    'In-Person Session'
-
-            };
-
-
-            sessionContent.innerHTML = `
-
-                <div>
-
-                    ${
-                        modes
-                            .map(
-                                mode => {
-
-                                    return `
-
-                                        <button
-                                            class="session-btn"
-                                            disabled
-                                        >
-                                            ${
-                                                labels[mode] ||
-                                                mode
-                                            }
-                                        </button>
-
-                                    `;
-
-                                }
-                            )
-                            .join('')
-                    }
-
+                  <!-- FLOWCHART PIPELINE STATUS FOR ARTISAN -->
+                  ${isAgreed ? `
+                    <div style="background: rgba(16,185,129,0.1); border: 1px solid #10b981; border-radius: var(--radius-sm); padding: 16px; margin-bottom: 16px;">
+                      <h4 style="color: #10b981; margin-bottom: 8px;">🏆 WON! Commission Agreement Confirmed</h4>
+                      <div style="font-size: 0.9rem; color: var(--text-main);">
+                        <div><strong>Agreed Price:</strong> ₹${c.price ? c.price.total : c.selectedBid.proposedPrice}</div>
+                        <div><strong>Dimensions:</strong> ${escapeHtml(c.requirements ? c.requirements.dimensions : 'Standard Canvas')}</div>
+                        <div><strong>Materials:</strong> ${escapeHtml(c.requirements ? c.requirements.materials : 'Organic Dyes')}</div>
+                        <div><strong>Delivery Deadline:</strong> ${escapeHtml(c.requirements ? c.requirements.deliveryDate : '10 Days')}</div>
+                      </div>
+                    </div>
+                  ` : (myBid ? `
+                    <div style="background: rgba(217,93,57,0.1); border: 1px solid var(--terracotta); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 16px;">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--terracotta); font-weight: 700;">⏳ STATUS: WAIT (Bid Submitted)</span>
+                        <strong style="color: var(--gold);">Your Bid: ₹${myBid.proposedPrice} (${myBid.estimatedDays} Days)</strong>
+                      </div>
+                      <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 6px;">
+                        Proposed Sketch Note: "${escapeHtml(myBid.sketchNote)}"
+                      </p>
+                    </div>
+                  ` : `
+                    <button class="btn btn-primary open-bid-modal-btn" data-reqid="${c.requestId}" style="align-self: flex-start;">
+                      🎨 BID WITH SKETCH &rarr;
+                    </button>
+                  `)}
                 </div>
+              `;
+            }).join('')}
+          </div>
+        `;
 
-                <p>
-                    Buyers can use these session modes
-                    from the artist profile.
-                </p>
+        document.querySelectorAll('.open-bid-modal-btn').forEach(b => {
+          b.addEventListener('click', () => {
+            document.getElementById('bid-request-id').value = b.dataset.reqid;
+            bidModal.classList.remove('hidden');
+          });
+        });
+      }
 
-            `;
+      document.getElementById('close-bid-modal').addEventListener('click', () => {
+        bidModal.classList.add('hidden');
+      });
 
+      // Submit Bid Form (BID WITH SKETCH -> WAIT)
+      bidForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const requestId = document.getElementById('bid-request-id').value;
+        const proposedPrice = document.getElementById('bid-proposed-price').value;
+        const estimatedDays = document.getElementById('bid-days').value;
+        const sketchNote = document.getElementById('bid-sketch-note').value;
+
+        const currentArtisanId = profileSelect.value;
+        const currentArtisanName = profileSelect.options[profileSelect.selectedIndex].text.split(' (')[0];
+
+        try {
+          const res = await fetch(`/api/commission/${requestId}/bid`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              artistId: currentArtisanId,
+              artistName: currentArtisanName,
+              craft: currentArtisanId === 'artist1' ? 'Blue Art Pottery' : (currentArtisanId === 'artist2' ? 'Madhubani Painting' : 'Lac Bangles'),
+              proposedPrice,
+              estimatedDays,
+              sketchNote
+            })
+          });
+
+          if (res.ok) {
+            bidModal.classList.add('hidden');
+            fetchCommissions();
+          }
+        } catch (err) {
+          console.error('Submit bid error:', err);
         }
+      });
 
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
 
-        /*
-         * =========================================
-         * ARTIST SELECTION
-         * =========================================
-         */
-
-        artistSelector.addEventListener(
-            'change',
-            function () {
-
-                loadArtist(
-                    this.value
-                );
-
-            }
-        );
-
-
-        /*
-         * =========================================
-         * CHECK EXISTING SESSION
-         * =========================================
-         */
-
-        function checkExistingSession() {
-
-            const session =
-                localStorage.getItem(
-                    'ks_artist_session'
-                );
-
-
-            if (!session) {
-
-                loginSection.classList.remove(
-                    'hidden'
-                );
-
-                dashboardSection.classList.add(
-                    'hidden'
-                );
-
-                return;
-
-            }
-
-
-            try {
-
-                const artist =
-                    JSON.parse(
-                        session
-                    );
-
-
-                showDashboard(
-                    artist
-                );
-
-            } catch (error) {
-
-                localStorage.removeItem(
-                    'ks_artist_session'
-                );
-
-            }
-
-        }
-
-
-        /*
-         * =========================================
-         * START
-         * =========================================
-         */
-
-        checkExistingSession();
-
-    </script>
-
+      fetchCommissions();
+    });
+  </script>
 </body>
-
 </html>

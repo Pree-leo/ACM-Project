@@ -1,137 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>KalaSetu - Welcome</title>
-
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KalaSetu - Heritage Art Platform</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-    <main id="role-picker">
+  <nav>
+    <div class="nav-brand">
+      <span>✨</span> KALASETU
+    </div>
+    <div class="nav-links">
+      <span class="coins">🪙 Art Coins Platform Active</span>
+    </div>
+  </nav>
 
-        <section>
+  <main style="text-align: center; max-width: 900px; padding-top: 60px;">
+    
+    <div style="display: inline-block; padding: 6px 16px; background: rgba(245, 158, 11, 0.15); border: 1px solid var(--gold); border-radius: 20px; color: var(--gold); font-weight: 600; font-size: 0.9rem; margin-bottom: 20px;">
+      HERITAGE FOLK ART MARKETPLACE & CUSTOM COMMISSIONS
+    </div>
 
-            <p>KALASETU</p>
+    <h1>KALASETU WORKFLOW</h1>
+    <p class="lead" style="margin: 0 auto 50px;">
+      Connecting buyers directly with traditional Indian master artisans. Choose your experience mode below:
+    </p>
 
-            <h1>
-                Preserving Heritage.
-                Connecting People.
-            </h1>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; text-align: left;">
+      
+      <!-- BUYER ROLE -->
+      <div class="card" style="border-top: 4px solid var(--terracotta); cursor: pointer;" id="buyer-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <span style="font-size: 2.5rem;">🛍️</span>
+          <span class="role-badge">BUYER FLOW</span>
+        </div>
+        <h2 style="margin-bottom: 12px; border: none; padding: 0;">I'm a Buyer</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
+          Explore Indian folk craft. Search artwork (FOUND → Artist Page with Story Dots & Sessions, or NOT FOUND → AI Sketch & 2 Bids Commission).
+        </p>
 
-            <p>
-                A digital space where traditional
-                Indian artisans meet people who want
-                to discover, support and experience
-                their craft.
-            </p>
+        <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; color: var(--amber); margin-bottom: 20px;">
+          <strong>Flow:</strong> Discover → Found/Not Found → Artist Page / Commission (AI Sketch → 2 Bids → Pick Artist → Requirements → Agreed)
+        </div>
 
-        </section>
+        <button class="btn btn-primary" style="width: 100%; justify-content: center;" id="buyer-btn">
+          Enter as Buyer &rarr;
+        </button>
+      </div>
 
+      <!-- ARTIST ROLE -->
+      <div class="card" style="border-top: 4px solid var(--gold); cursor: pointer;" id="artist-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <span style="font-size: 2.5rem;">🎨</span>
+          <span class="role-badge" style="background: var(--gold); color: #000;">ARTIST FLOW</span>
+        </div>
+        <h2 style="margin-bottom: 12px; border: none; padding: 0;">I'm an Artisan</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
+          Manage your portfolio, view incoming buyer requests, submit proposals with concept sketches, and accept commissions.
+        </p>
 
-        <section>
+        <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; color: var(--amber); margin-bottom: 20px;">
+          <strong>Flow:</strong> Artist Requests → Bid with Sketch → Wait → Won → Lock Requirements
+        </div>
 
-            <h2>
-                How would you like to continue?
-            </h2>
+        <button class="btn btn-secondary" style="width: 100%; justify-content: center;" id="artist-btn">
+          Enter Artist Portal &rarr;
+        </button>
+      </div>
 
+    </div>
 
-            <div>
+  </main>
 
-                <button
-                    type="button"
-                    id="buyer-role"
-                >
-
-                    <span>
-                        🛍️
-                    </span>
-
-                    <h3>
-                        I'm a Buyer
-                    </h3>
-
-                    <p>
-                        Discover traditional art,
-                        explore artisans, buy artwork
-                        and commission something
-                        personal.
-                    </p>
-
-                </button>
-
-
-                <button
-                    type="button"
-                    id="artist-role"
-                >
-
-                    <span>
-                        🎨
-                    </span>
-
-                    <h3>
-                        I'm an Artist
-                    </h3>
-
-                    <p>
-                        Showcase your craft,
-                        connect with buyers,
-                        receive commissions and
-                        share your story.
-                    </p>
-
-                </button>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <script>
-
-        document
-            .getElementById('buyer-role')
-            .addEventListener(
-                'click',
-                function () {
-
-                    window.location.href =
-                        'buyer.html';
-
-                }
-            );
-
-
-        document
-            .getElementById('artist-role')
-            .addEventListener(
-                'click',
-                function () {
-
-                    window.location.href =
-                        'artist-dashboard.html';
-
-                }
-            );
-
-    </script>
+  <script>
+    document.getElementById('buyer-card').addEventListener('click', () => { window.location.href = 'buyer.html'; });
+    document.getElementById('buyer-btn').addEventListener('click', (e) => { e.stopPropagation(); window.location.href = 'buyer.html'; });
+    document.getElementById('artist-card').addEventListener('click', () => { window.location.href = 'artist-dashboard.html'; });
+    document.getElementById('artist-btn').addEventListener('click', (e) => { e.stopPropagation(); window.location.href = 'artist-dashboard.html'; });
+  </script>
 
 </body>
-
 </html>

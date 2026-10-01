@@ -1,172 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>KalaSetu - Commission</title>
-
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KalaSetu - Custom Commission Flow</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-    <!-- Navigation -->
-    <nav class="nav">
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">✨ KALASETU</a>
+    <div class="nav-links">
+      <a href="buyer.html">Buyer Home</a>
+      <a href="discover.html">Discover</a>
+      <a href="commission.html" class="active">Commission</a>
+      <span class="coins">🪙 Art Coins: <strong id="art-coins">100</strong></span>
+      <a href="index.html" class="role-badge">Switch Role</a>
+    </div>
+  </nav>
 
-        <a href="buyer.html">
-            <strong>KalaSetu</strong>
+  <main>
+
+    <div style="margin-bottom: 24px;">
+      <span style="color: var(--terracotta); font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;">BUYER FLOW: CUSTOM COMMISSION</span>
+      <h1>ARTISAN COMMISSION PIPELINE</h1>
+      <p class="lead">
+        From custom idea to agreed commission contract in 5 seamless steps.
+      </p>
+    </div>
+
+    <!-- FLOWCHART STEPPER INDICATOR -->
+    <div class="stepper" id="pipeline-stepper">
+      <div class="step on" id="step-nav-1">1. AI SKETCH</div>
+      <div class="step" id="step-nav-2">2. 2 BIDS</div>
+      <div class="step" id="step-nav-3">3. PICK ARTIST</div>
+      <div class="step" id="step-nav-4">4. REQUIREMENTS</div>
+      <div class="step" id="step-nav-5">5. PRICE & AGREED</div>
+    </div>
+
+    <!-- ==========================================
+         STEP 1: AI SKETCH
+         ========================================== -->
+    <section id="sec-step-1" class="card" style="border-top: 4px solid var(--gold);">
+      <span class="role-badge" style="background: var(--gold); color: #000; margin-bottom: 12px; display: inline-block;">STEP 1: AI SKETCH</span>
+      <h2>Describe Your Custom Vision</h2>
+      <p style="color: var(--text-muted); margin-bottom: 20px;">
+        Gemini AI will synthesize your vision into a visual concept sketch specification for artisans to bid on.
+      </p>
+
+      <form id="ai-sketch-form">
+        <label for="commission-prompt">What custom artwork would you like created?</label>
+        <textarea
+          id="commission-prompt"
+          rows="4"
+          placeholder="E.g., A peaceful peacock sitting under a blossoming lotus tree painted with natural turmeric and indigo dyes..."
+          required
+        ></textarea>
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 200px;">
+            <label for="craft-preference">Preferred Craft Style (Optional)</label>
+            <select id="craft-preference">
+              <option value="">Artisan Recommendation (Any Craft)</option>
+              <option value="Madhubani Painting">Madhubani Painting (Bihar)</option>
+              <option value="Blue Art Pottery">Blue Art Pottery (Jaipur)</option>
+              <option value="Lac Bangles & Resin Art">Lac Bangles & Metal Art (Rajasthan)</option>
+            </select>
+          </div>
+          <div style="flex: 1; min-width: 200px;">
+            <label for="buyer-name-input">Your Name</label>
+            <input type="text" id="buyer-name-input" placeholder="Enter your name" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="generate-sketch-btn" style="align-self: flex-start; margin-top: 8px;">
+          ✨ Generate AI Sketch Concept &rarr;
+        </button>
+      </form>
+
+      <!-- AI SKETCH PREVIEW CONTAINER -->
+      <div id="ai-sketch-output" class="hidden" style="margin-top: 30px; background: rgba(15,23,42,0.9); border: 1px dashed var(--gold); border-radius: var(--radius-md); padding: 24px;">
+        <!-- Rendered by commission.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 2 & 3: 2 BIDS + PICK ARTIST
+         ========================================== -->
+    <section id="sec-step-2" class="card hidden" style="border-top: 4px solid var(--terracotta);">
+      <span class="role-badge" style="margin-bottom: 12px; display: inline-block;">STEP 2 & 3: 2 BIDS & PICK ARTIST</span>
+      <h2>Artisan Proposals Received</h2>
+      <p style="color: var(--text-muted); margin-bottom: 24px;">
+        Review the 2 master artisan bids submitted for your AI Sketch concept. Pick the artist you'd like to work with.
+      </p>
+
+      <div id="bids-container" class="bids-grid">
+        <!-- Rendered by commission.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 4: REQUIREMENTS & PRICE
+         ========================================== -->
+    <section id="sec-step-4" class="card hidden" style="border-top: 4px solid var(--indigo);">
+      <span class="role-badge" style="background: var(--indigo); color: #fff; margin-bottom: 12px; display: inline-block;">STEP 4: REQUIREMENTS & PRICE</span>
+      <h2>Refine Requirements & Lock Price</h2>
+      <p style="color: var(--text-muted); margin-bottom: 20px;">
+        Specify final dimensions, organic dye choices, and delivery deadline to lock in the agreed price.
+      </p>
+
+      <form id="requirements-form">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+          <div>
+            <label for="req-dimensions">Artwork Dimensions</label>
+            <input type="text" id="req-dimensions" value='14" x 18" Medium Canvas' required>
+          </div>
+          <div>
+            <label for="req-materials">Organic Materials</label>
+            <input type="text" id="req-materials" value="Handmade paper, turmeric & indigo organic dyes" required>
+          </div>
+          <div>
+            <label for="req-delivery">Target Delivery Date</label>
+            <input type="text" id="req-delivery" value="Within 10 Business Days" required>
+          </div>
+        </div>
+
+        <!-- Price Breakdown Table -->
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--bg-card-border); border-radius: var(--radius-sm); padding: 20px; margin: 20px 0;">
+          <h3 style="color: var(--gold); margin-bottom: 12px;">Itemized Price Breakdown</h3>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span style="color: var(--text-muted);">Artisan Labor & Craft Fee (75%):</span>
+            <strong id="price-artisan">₹1,800</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span style="color: var(--text-muted);">Raw Materials & Dyes (20%):</span>
+            <strong id="price-materials">₹480</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+            <span style="color: var(--text-muted);">KalaSetu Authentication Certificate (5%):</span>
+            <strong id="price-cert">₹120</strong>
+          </div>
+          <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 12px;">
+          <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700; color: var(--gold);">
+            <span>Agreed Total Price:</span>
+            <strong id="price-total">₹2,400</strong>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="align-self: flex-start; font-size: 1rem;">
+          🤝 Agree to Requirements & Lock Price &rarr;
+        </button>
+      </form>
+    </section>
+
+    <!-- ==========================================
+         STEP 5: COMMISSION AGREED
+         ========================================== -->
+    <section id="sec-step-5" class="card hidden" style="border-top: 4px solid #10b981; text-align: center; padding: 40px;">
+      <div style="font-size: 3.5rem; margin-bottom: 12px;">🤝✨</div>
+      <span class="role-badge" style="background: #10b981; color: #fff; margin-bottom: 16px; display: inline-block;">COMMISSION AGREED</span>
+      <h2 style="border: none; padding: 0; margin-bottom: 12px;">Commission Deal Successfully Locked!</h2>
+      <p class="lead" style="margin: 0 auto 30px; max-width: 600px;">
+        Both Buyer and Artisan have formally agreed on concept sketch, requirements, and total price.
+      </p>
+
+      <div id="agreed-summary-box" style="background: rgba(16, 185, 129, 0.08); border: 1px solid #10b981; border-radius: var(--radius-md); padding: 24px; max-width: 600px; margin: 0 auto 30px; text-align: left;">
+        <!-- Rendered by commission.js -->
+      </div>
+
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="buyer.html" class="btn btn-primary">
+          ↩️ Return to Buyer Dashboard
         </a>
-
-        <a href="buyer.html">
-            Home
+        <a href="discover.html" class="btn btn-secondary">
+          🔍 Discover More Artwork
         </a>
+      </div>
+    </section>
 
-        <a href="discover.html">
-            Discover
-        </a>
+  </main>
 
-        <a href="commission.html">
-            Commission
-        </a>
-
-        <span class="coins">
-            Art Coins:
-            <strong id="coin-balance">100</strong>
-        </span>
-
-        <a href="index.html">
-            Switch Role
-        </a>
-
-    </nav>
-
-
-    <main>
-
-        <h1>Commission an Artist</h1>
-
-        <p>
-            Request a custom artwork directly from
-            an artist.
-        </p>
-
-
-        <!-- Commission Form -->
-        <section id="commission-form-section">
-
-            <h2>Commission Request</h2>
-
-            <form id="commission-form">
-
-                <label for="artist-select">
-                    Choose Artist
-                </label>
-
-                <select
-                    id="artist-select"
-                    required
-                >
-
-                    <option value="">
-                        Loading artists...
-                    </option>
-
-                </select>
-
-
-                <label for="buyer-name">
-                    Your Name
-                </label>
-
-                <input
-                    type="text"
-                    id="buyer-name"
-                    placeholder="Enter your name"
-                    required
-                >
-
-
-                <label for="commission-description">
-                    What would you like the artist to create?
-                </label>
-
-                <textarea
-                    id="commission-description"
-                    rows="7"
-                    placeholder="Describe your custom artwork..."
-                    required
-                ></textarea>
-
-
-                <button
-                    type="submit"
-                    class="buy-btn"
-                >
-                    Submit Commission Request
-                </button>
-
-            </form>
-
-        </section>
-
-
-        <!-- Request Status -->
-        <section
-            id="commission-status-section"
-            class="hidden"
-        >
-
-            <h2>Commission Status</h2>
-
-            <div id="commission-status">
-
-                <p>
-                    Your commission request is being processed.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- Demo Artist Acceptance -->
-        <section
-            id="artist-accept-section"
-            class="hidden"
-        >
-
-            <h2>Artist Response</h2>
-
-            <p>
-                Artist-side acceptance is available here
-                for the prototype demonstration.
-            </p>
-
-            <button
-                id="accept-commission-button"
-                class="buy-btn"
-            >
-                Accept Commission
-            </button>
-
-        </section>
-
-    </main>
-
-
-    <script src="js/main.js"></script>
-
-    <script src="js/commission.js"></script>
-
+  <script src="js/main.js"></script>
+  <script src="js/commission.js"></script>
 </body>
-
 </html>

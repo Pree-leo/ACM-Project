@@ -65,28 +65,251 @@ app.get('/api/artists/:id', (req, res) => {
   res.json(artist);
 });
 
-// ---------- Commission ----------
-app.post('/api/commission', (req, res) => {
-  const { artistId, buyerName, description } = req.body;
-  if (!artistId || !buyerName || !description) {
-    return res.status(400).json({ error: 'artistId, buyerName, description required' });
-  }
-  const requestId = 'c' + commissionCounter++;
-  commissions.push({ requestId, artistId, buyerName, description, status: 'pending' });
-  res.json({ status: 'pending', requestId });
+// ---------- All Artworks Feed Endpoint (Flipkart-style Feed) ----------
+app.get('/api/artworks', (req, res) => {
+  const all = allArtworks();
+  res.json(all);
 });
 
-app.post('/api/commission/:id/accept', (req, res) => {
-  const c = commissions.find(x => x.requestId === req.params.id);
-  if (!c) return res.status(404).json({ error: 'Request not found' });
-  c.status = 'accepted';
-  res.json({ status: 'accepted' });
+app.get('/api/artworks/:id', (req, res) => {
+  const all = allArtworks();
+  const artwork = all.find(w => w.id === req.params.id);
+  if (!artwork) return res.status(404).json({ error: 'Artwork not found' });
+  const artist = artists.find(a => a.id === artwork.artistId);
+  res.json({ ...artwork, artist });
+});
+
+// Helper for SVG visual sketch rendering
+function generateVisualSvgSketch(title, craft, prompt, palette) {
+  const p1 = (palette && palette[0]) ? palette[0] : '#d95d39';
+  const p2 = (palette && palette[1]) ? palette[1] : '#f59e0b';
+  const p3 = (palette && palette[2]) ? palette[2] : '#4338ca';
+  const cleanTitle = (title || prompt || 'Custom Heritage Concept').slice(0, 35);
+  const cleanCraft = (craft || 'Folk Art').slice(0, 25);
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380" style="width:100%; height:auto; border-radius:12px; background:#0f172a; border:2px solid ${p2}; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <defs>
+      <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#151c2c"/>
+        <stop offset="100%" stop-color="#0b0f19"/>
+      </linearGradient>
+      <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+        <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(245,158,11,0.08)" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="600" height="380" fill="url(#bgGrad)"/>
+    <rect width="600" height="380" fill="url(#grid)"/>
+
+    <!-- Decorative Folk Frame -->
+    <rect x="18" y="18" width="564" height="344" rx="8" fill="none" stroke="${p2}" stroke-width="2" stroke-dasharray="6,4"/>
+    
+    <!-- Central Motif Representation -->
+    <circle cx="300" cy="170" r="75" fill="none" stroke="${p1}" stroke-width="3" stroke-dasharray="12,6"/>
+    <circle cx="300" cy="170" r="48" fill="rgba(217,93,57,0.15)" stroke="${p2}" stroke-width="2"/>
+    <polygon points="300,115 318,152 355,170 318,188 300,225 282,188 245,170 282,152" fill="none" stroke="${p3}" stroke-width="2.5"/>
+    <circle cx="300" cy="170" r="14" fill="${p2}"/>
+
+    <!-- Folk Ornaments -->
+    <path d="M 90 170 Q 195 90 300 170 Q 405 250 510 170" fill="none" stroke="${p2}" stroke-width="2" opacity="0.6"/>
+
+    <!-- Title Banner -->
+    <rect x="28" y="305" width="544" height="46" rx="6" fill="rgba(11,15,25,0.9)" stroke="${p2}" stroke-width="1"/>
+    <text x="44" y="334" font-family="Playfair Display, Georgia, serif" font-size="16" fill="#f8fafc" font-weight="bold">✨ CONCEPT SKETCH: ${cleanTitle}</text>
+    <text x="556" y="334" text-anchor="end" font-family="Outfit, sans-serif" font-size="12" fill="${p2}" font-weight="600">${cleanCraft}</text>
+  </svg>`;
+}
+
+// ---------- Commission Flow (Flowchart Aligned) ----------
+app.get('/api/commissions', (req, res) => {
+  res.json(commissions);
+});
+
+app.post('/api/commission/ai-sketch', async (req, res) => {
+  const { prompt, craft } = req.body;
+  if (!prompt) return res.status(400).json({ error: 'Prompt is required' });
+
+  const aiPrompt = `You are KalaSetu's AI Master Artisan Assistant specializing in traditional Indian heritage craft.
+A buyer wants a custom commission with prompt: "${prompt}". Requested Craft: "${craft || 'Traditional Indian Craft'}".
+Create an AI visual concept sketch specification.
+Respond strictly with ONLY a JSON object:
+{
+  "title": "Short poetic artwork title",
+  "concept": "A 2-sentence description of the visual design and symbolism",
+  "suggestedCraft": "Art form name",
+  "palette": ["Primary color", "Secondary color", "Accent color"],
+  "estimatedPriceRange": "₹2,200 - ₹3,500",
+  "estimatedDays": "7 - 10 days",
+  "sketchVisual": "Visual elements summary"
+}`;
+
+  try {
+    if (process.env.FORCE_FALLBACK === '1') throw new Error('Force fallback');
+    const response = await withRetry(() => Promise.race([
+      ai.models.generateContent({
+        model: GEMINI_MODEL,
+        contents: aiPrompt,
+        config: { responseMimeType: 'application/json' }
+      }),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Gemini timeout')), 4000))
+    ]), 1, 0);
+
+    const parsed = JSON.parse(response.text.replace(/```json|```/g, '').trim());
+    parsed.svgImage = generateVisualSvgSketch(parsed.title, parsed.suggestedCraft || craft, prompt, parsed.palette);
+    return res.json({ success: true, sketch: parsed, source: 'gemini' });
+  } catch (err) {
+    console.warn('[ai-sketch] Gemini unavailable/rate-limited, returning fallback visual sketch', err.message);
+    const fallbackSketch = {
+      title: `Custom Concept: ${prompt.slice(0, 30)}...`,
+      concept: `A handcrafted custom artwork piece reflecting ${prompt}. Using traditional motifs and vibrant natural pigments.`,
+      suggestedCraft: craft || "Madhubani Painting & Traditional Craft",
+      palette: ["Terracotta Rust", "Deep Indigo", "Warm Gold"],
+      estimatedPriceRange: "₹2,000 - ₹3,200",
+      estimatedDays: "7 - 10 days",
+      sketchVisual: "Traditional hand-painted motifs with floral borders and organic dye texturing."
+    };
+    fallbackSketch.svgImage = generateVisualSvgSketch(fallbackSketch.title, fallbackSketch.suggestedCraft, prompt, fallbackSketch.palette);
+    return res.json({
+      success: true,
+      sketch: fallbackSketch,
+      source: 'fallback'
+    });
+  }
+});
+
+app.post('/api/commission', (req, res) => {
+  const { buyerName, description, aiSketch, artistId } = req.body;
+  if (!buyerName || !description) {
+    return res.status(400).json({ error: 'buyerName and description required' });
+  }
+
+  const requestId = 'c' + commissionCounter++;
+
+  // Generate 2 default bids from master artisans (Gopal Saini & Ambika Devi) for buyer review
+  const initialBids = [
+    {
+      bidId: 'bid-1-' + requestId,
+      artistId: 'artist1',
+      artistName: 'Gopal Saini',
+      craft: 'Blue Art Pottery',
+      proposedPrice: 2400,
+      estimatedDays: 7,
+      sketchNote: 'Quartz mold base with cobalt lotus glazing & natural heat kiln finish.',
+      status: 'pending'
+    },
+    {
+      bidId: 'bid-2-' + requestId,
+      artistId: 'artist2',
+      artistName: 'Ambika Devi',
+      craft: 'Madhubani Painting',
+      proposedPrice: 2800,
+      estimatedDays: 9,
+      sketchNote: 'Bamboo twig painting on handmade canvas using turmeric & indigo dyes.',
+      status: 'pending'
+    }
+  ];
+
+  if (artistId) {
+    const artistObj = artists.find(a => a.id === artistId);
+    if (artistObj) {
+      initialBids.unshift({
+        bidId: 'bid-direct-' + requestId,
+        artistId: artistObj.id,
+        artistName: artistObj.name,
+        craft: artistObj.craft,
+        proposedPrice: 2500,
+        estimatedDays: 8,
+        sketchNote: `Direct commission proposal by ${artistObj.name} according to requirements.`,
+        status: 'pending'
+      });
+    }
+  }
+
+  const commission = {
+    requestId,
+    buyerName,
+    description,
+    aiSketch: aiSketch || null,
+    status: '2_bids_received', // Flowchart step: 2 BIDS
+    bids: initialBids,
+    selectedBid: null,
+    requirements: null,
+    price: null,
+    agreed: false,
+    createdAt: new Date().toISOString()
+  };
+
+  commissions.push(commission);
+  res.json({ status: 'created', requestId, commission });
 });
 
 app.get('/api/commission/:id', (req, res) => {
   const c = commissions.find(x => x.requestId === req.params.id);
   if (!c) return res.status(404).json({ error: 'Request not found' });
   res.json(c);
+});
+
+// Artist submits custom bid
+app.post('/api/commission/:id/bid', (req, res) => {
+  const c = commissions.find(x => x.requestId === req.params.id);
+  if (!c) return res.status(404).json({ error: 'Request not found' });
+  const { artistId, artistName, craft, proposedPrice, estimatedDays, sketchNote } = req.body;
+  if (!artistName || !proposedPrice) return res.status(400).json({ error: 'artistName and proposedPrice required' });
+
+  const newBid = {
+    bidId: 'bid-' + Date.now(),
+    artistId: artistId || 'artist-custom',
+    artistName,
+    craft: craft || 'Traditional Craft',
+    proposedPrice: Number(proposedPrice),
+    estimatedDays: Number(estimatedDays || 7),
+    sketchNote: sketchNote || 'Handcrafted custom concept according to specs.',
+    status: 'pending'
+  };
+
+  c.bids.push(newBid);
+  res.json({ success: true, bid: newBid, commission: c });
+});
+
+// Buyer picks an artist bid (PICK ARTIST)
+app.post('/api/commission/:id/pick', (req, res) => {
+  const c = commissions.find(x => x.requestId === req.params.id);
+  if (!c) return res.status(404).json({ error: 'Request not found' });
+  const { bidId } = req.body;
+  const pickedBid = c.bids.find(b => b.bidId === bidId);
+  if (!pickedBid) return res.status(404).json({ error: 'Bid not found' });
+
+  c.bids.forEach(b => b.status = (b.bidId === bidId ? 'selected' : 'rejected'));
+  c.selectedBid = pickedBid;
+  c.status = 'artist_picked'; // Flowchart step: PICK ARTIST
+  res.json({ success: true, selectedBid: pickedBid, commission: c });
+});
+
+// Lock Requirements & Price -> COMMISSION AGREED
+app.post('/api/commission/:id/agree', (req, res) => {
+  const c = commissions.find(x => x.requestId === req.params.id);
+  if (!c) return res.status(404).json({ error: 'Request not found' });
+  const { dimensions, materials, colorPalette, deliveryDate, finalPrice } = req.body;
+
+  const basePrice = c.selectedBid ? c.selectedBid.proposedPrice : 2500;
+  const agreedPrice = Number(finalPrice || basePrice);
+
+  c.requirements = {
+    dimensions: dimensions || '12" x 16" Standard Canvas',
+    materials: materials || 'Handmade paper & natural organic dyes',
+    colorPalette: colorPalette || 'Traditional heritage hues',
+    deliveryDate: deliveryDate || 'Within 10 business days'
+  };
+  c.price = {
+    basePrice: agreedPrice,
+    artisanFee: Math.round(agreedPrice * 0.75),
+    materialsCost: Math.round(agreedPrice * 0.20),
+    platformCert: Math.round(agreedPrice * 0.05),
+    total: agreedPrice
+  };
+  c.agreed = true;
+  c.status = 'commission_agreed'; // Flowchart step: COMMISSION AGREED
+
+  res.json({ success: true, commission: c });
 });
 
 // ---------- Live Session ----------
@@ -168,11 +391,17 @@ function fallbackMatch(query) {
   const q = query.toLowerCase().trim();
   const words = q.split(/[^a-z]+/).filter(w => w && !STOPWORDS.has(w));
   const phrase = words.join(' ');
+
+  // Keywords that represent items not present in our traditional craft catalog
+  const customKeywords = ['not found', 'custom', 'portrait', 'modern', 'cyberpunk', 'space', 'car', 'digital', 'abstract', 'shoes', 'synth'];
+  if (customKeywords.some(k => q.includes(k))) {
+    return { found: false, query, results: [] };
+  }
+
   const terms = new Set(words);
   words.forEach(w => (MOOD_WORDS[w] || []).forEach(t => terms.add(t)));
 
-  // Nothing meaningful typed -> show everything rather than an empty page
-  if (!terms.size) return allArtworks();
+  if (!terms.size) return { found: true, query, results: allArtworks() };
 
   const matches = (field, t) => {
     const f = field.toLowerCase();
@@ -187,17 +416,18 @@ function fallbackMatch(query) {
       if (matches(w.artistName, t)) score += 2;
       if (matches(w.region, t)) score += 1;
     });
-    // Bonus when the whole typed phrase appears, e.g. "blue lotus"
     if (phrase && (`${w.title} ${w.craft}`.toLowerCase().includes(phrase))) score += 4;
     return { w, score };
   });
 
   const hits = scored.filter(s => s.score > 0).sort((a, b) => b.score - a.score);
-  if (!hits.length) return allArtworks(); // never show an empty page in the demo
+  if (!hits.length) {
+    return { found: false, query, results: [] };
+  }
 
-  // Keep only the strong matches (at least ~1/3 of the top score), max 4
   const top = hits[0].score;
-  return hits.filter(s => s.score >= top / 3).slice(0, 4).map(s => s.w);
+  const filtered = hits.filter(s => s.score >= top / 3).slice(0, 4).map(s => s.w);
+  return { found: true, query, results: filtered };
 }
 
 async function geminiMatch(query) {
@@ -207,9 +437,9 @@ async function geminiMatch(query) {
 
   const prompt = `You are the search engine for KalaSetu, a marketplace of Indian folk art and craft.
 A buyer typed: "${query}"
-This may be a mood/feeling (e.g. "peaceful", "festive") or a specific art form (e.g. "Madhubani art").
+This may be a mood/feeling (e.g. "peaceful", "festive"), a specific art form (e.g. "Madhubani art"), or a request for something custom/unrelated.
 From the catalog below, pick the artworks that best match, most relevant first. Return at most 4.
-Only use ids that exist in the catalog. If nothing fits well, return the 2 closest.
+Only use ids that exist in the catalog. If nothing fits or if the request is for custom/unrelated art (e.g. "cyberpunk", "modern car"), return an empty array [].
 Respond with ONLY a JSON array of artwork id strings, no other text.
 
 Catalog:
@@ -228,10 +458,17 @@ ${JSON.stringify(catalog)}`;
   const ids = JSON.parse(text);
   if (!Array.isArray(ids)) throw new Error('Gemini did not return an array');
 
+  if (ids.length === 0) {
+    return { found: false, query, results: [] };
+  }
+
   const byId = new Map(allArtworks().map(w => [w.id, w]));
   const matched = ids.map(id => byId.get(id)).filter(Boolean);
-  if (!matched.length) throw new Error('Gemini returned no valid ids');
-  return matched;
+  if (!matched.length) {
+    return { found: false, query, results: [] };
+  }
+
+  return { found: true, query, results: matched };
 }
 
 app.post('/api/discover', async (req, res) => {
@@ -241,23 +478,26 @@ app.post('/api/discover', async (req, res) => {
 
   if (discoverCache.has(key)) {
     res.set('X-Source', 'cache');
-    return res.json(discoverCache.get(key));
+    const cached = discoverCache.get(key);
+    const payload = Array.isArray(cached) ? { found: cached.length > 0, query, results: cached } : cached;
+    return res.json(payload);
   }
 
   if (process.env.FORCE_FALLBACK !== '1') {
     try {
-      const results = await geminiMatch(query);
-      discoverCache.set(key, results);
+      const matchObj = await geminiMatch(query);
+      discoverCache.set(key, matchObj.results);
       saveCache();
-      console.log(`[discover] "${query}" -> Gemini (${results.length})`);
+      console.log(`[discover] "${query}" -> Gemini (found: ${matchObj.found}, count: ${matchObj.results.length})`);
       res.set('X-Source', 'gemini');
-      return res.json(results);
+      return res.json(matchObj);
     } catch (err) {
       console.warn(`[discover] Gemini failed (${String(err.message).slice(0, 80)}), using fallback`);
     }
   }
   res.set('X-Source', 'fallback');
-  res.json(fallbackMatch(query));
+  const fb = fallbackMatch(query);
+  res.json(fb);
 });
 
 // ---------- Auto-tag artwork (Gemini vision) ----------

@@ -1,627 +1,473 @@
-/* ================================
-   General Page
-   ================================ */
+/* ==========================================================================
+   KALASETU - Luxury Indian Craft & Modern Digital Experience Design System
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap');
 
 :root {
-    --terracotta: #B5502E;
-    --amber: #D98E2B;
-    --maroon: #5E1A1A;
-    --gold: #C9A24B;
-    --cream: #FBF4EA;
-    --ink: #2A1512;
+  --bg-dark: #0b0f19;
+  --bg-card: rgba(21, 28, 44, 0.75);
+  --bg-card-border: rgba(217, 119, 6, 0.25);
+  --terracotta: #d95d39;
+  --terracotta-glow: rgba(217, 93, 57, 0.35);
+  --gold: #f59e0b;
+  --gold-glow: rgba(245, 158, 11, 0.3);
+  --amber: #fef3c7;
+  --indigo: #4338ca;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-glow: 0 10px 30px -10px rgba(217, 93, 57, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: var(--cream);
-    color: var(--ink);
+  font-family: var(--font-body);
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(217, 93, 57, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(67, 56, 202, 0.15) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.6;
 }
 
+a {
+  color: var(--gold);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
 
-/* ================================
+a:hover {
+  color: #fbbf24;
+  text-shadow: 0 0 10px var(--gold-glow);
+}
+
+/* ==========================================================================
    Navigation Bar
-   ================================ */
+   ========================================================================== */
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    border-bottom: 1px solid var(--gold);
+nav, .nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 5%;
+  background: rgba(11, 15, 25, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--bg-card-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-nav a {
-    margin-right: 20px;
-    text-decoration: none;
-    color: var(--maroon);
+.nav-brand {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #f59e0b, #d95d39);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-nav a:first-child {
-    font-size: 22px;
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
-nav span {
-    margin-left: 10px;
+.nav-links a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
 }
 
-
-/* New navigation class */
-
-.nav {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--gold);
+.nav-links a:hover, .nav-links a.active {
+  color: var(--text-main);
+  background: rgba(245, 158, 11, 0.1);
 }
 
-.nav a {
-    color: var(--maroon);
-    text-decoration: none;
-    margin-right: 0;
+.coins {
+  background: linear-gradient(135deg, rgba(217, 93, 57, 0.2), rgba(245, 158, 11, 0.2));
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.nav .coins {
-    margin-left: auto;
-    background: var(--maroon);
-    color: var(--cream);
-    padding: 6px 14px;
-    border-radius: 20px;
+/* Role Switcher Pill */
+.role-badge {
+  background: var(--terracotta);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-
-/* ================================
-   Main Content
-   ================================ */
+/* ==========================================================================
+   Layout Containers
+   ========================================================================== */
 
 main {
-    padding: 40px;
-    max-width: 1000px;
-    margin: 0 auto;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+section {
+  margin-bottom: 50px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--text-main);
+  line-height: 1.25;
 }
 
 h1 {
-    font-size: 42px;
-    margin-bottom: 20px;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #ffffff, var(--amber));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 h2 {
-    font-size: 30px;
-    margin-top: 35px;
-    margin-bottom: 20px;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--terracotta);
+  padding-left: 12px;
 }
 
 h3 {
-    font-size: 22px;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
 }
 
-
-/* ================================
-   Buttons
-   ================================ */
-
-button.btn {
-    cursor: pointer;
-    font-family: inherit;
+p.lead {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin-bottom: 24px;
 }
 
-.btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
+/* ==========================================================================
+   Buttons & Interactive Elements
+   ========================================================================== */
+
+button, .btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.95rem;
 }
 
-.buy-btn {
-    padding: 10px 18px;
-    font-size: 16px;
-    cursor: pointer;
+.btn-primary, .buy-btn, #discover-search-button {
+  background: linear-gradient(135deg, var(--terracotta), #b93815);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(217, 93, 57, 0.4);
 }
 
-.session-btn {
-    padding: 10px 16px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    cursor: pointer;
+.btn-primary:hover, .buy-btn:hover, #discover-search-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(217, 93, 57, 0.6);
 }
 
-
-/* ================================
-   Utility Classes
-   ================================ */
-
-.hidden {
-    display: none !important;
+.btn-secondary, .session-btn {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--gold);
+  border: 1px solid rgba(245, 158, 11, 0.4);
 }
 
-
-/* ================================
-   Home - Artist Cards
-   ================================ */
-
-#artist-list {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-}
-
-.artist-card {
-    padding: 24px;
-    border: 1px solid var(--gold);
-    cursor: pointer;
-    width: 220px;
-    min-height: 150px;
-    background: #ffffff;
-    box-sizing: border-box;
-}
-
-.artist-card:hover {
-    border-color: var(--terracotta);
-}
-
-
-/* ================================
-   Artist Information
-   ================================ */
-
-#artist-info {
-    margin-bottom: 30px;
-}
-
-#artist-info p {
-    font-size: 18px;
-    line-height: 1.5;
-}
-
-.artist-badge {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid var(--gold);
-    background: var(--cream);
-}
-
-.artist-badge p {
-    margin-bottom: 0;
-}
-
-
-/* New Artist Hero */
-
-.artist-hero {
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    gap: 32px;
-    align-items: start;
-}
-
-.portrait {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border: 2px solid var(--gold);
-}
-
-.badge {
-    display: inline-block;
-    background: var(--amber);
-    color: var(--maroon);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-weight: 600;
-}
-
-.badge-reason {
-    font-size: 0.85rem;
-    opacity: 0.8;
-}
-
-
-/* ================================
-   Artworks
-   ================================ */
-
-#artwork-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-}
-
-.artwork-card {
-    width: 320px;
-    max-width: 100%;
-    margin-bottom: 30px;
-    border: 1px solid var(--gold);
-    padding: 15px;
-    box-sizing: border-box;
-    background: #ffffff;
-}
-
-.artwork-card img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-}
-
-.artwork-card h3 {
-    margin-top: 15px;
-    margin-bottom: 8px;
-}
-
-.artwork-card p {
-    margin: 6px 0;
-}
-
-
-/* ================================
-   New Portfolio
-   ================================ */
-
-.portfolio {
-    display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(280px, 1fr)
-    );
-    gap: 24px;
-}
-
-.art-card {
-    background: #ffffff;
-    border: 1px solid var(--gold);
-    padding: 12px;
-}
-
-.story-img {
-    position: relative;
-}
-
-.story-img img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    display: block;
-}
-
-
-/* ================================
-   Story Card Hotspots
-   ================================ */
-
-.dot {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: var(--gold);
-    border: 2px solid #ffffff;
-    cursor: pointer;
-    animation: pulse 2s infinite;
-}
-
-.dot.active {
-    background: var(--terracotta);
-}
-
-@keyframes pulse {
-    0% {
-        box-shadow:
-            0 0 0 0 rgba(201, 162, 75, 0.7);
-    }
-
-    100% {
-        box-shadow:
-            0 0 0 14px rgba(201, 162, 75, 0);
-    }
-}
-
-.story-text {
-    min-height: 64px;
-    padding: 10px;
-    background: var(--cream);
-    font-size: 0.95rem;
-    margin: 8px 0;
-}
-
-
-/* ================================
-   Reviews
-   ================================ */
-
-#review-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-}
-
-.review-card {
-    width: 320px;
-    max-width: 100%;
-    border: 1px solid var(--gold);
-    padding: 15px;
-    box-sizing: border-box;
-    background: #ffffff;
-}
-
-.review-card img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-}
-
-.review-card h3 {
-    margin-top: 15px;
-    margin-bottom: 8px;
-}
-
-.review-card p {
-    line-height: 1.5;
-}
-
-
-/* New Review Layout */
-
-.reviews {
-    display: grid;
-    gap: 16px;
-}
-
-.review {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.review img {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-
-/* ================================
-   Purchase Section
-   ================================ */
-
-#purchase-section {
-    margin-top: 35px;
-    padding: 20px;
-    border: 1px solid var(--gold);
-}
-
-
-/* ================================
-   Session Section
-   ================================ */
-
-#session-section {
-    margin-top: 35px;
-    padding: 20px;
-    border: 1px solid var(--gold);
-}
-
-#session-status {
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-
-/* ================================
-   Session Modal
-   ================================ */
-
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(42, 21, 18, 0.6);
-    display: grid;
-    place-items: center;
-    z-index: 10;
-}
-
-.modal-box {
-    background: var(--cream);
-    padding: 28px;
-    max-width: 420px;
-    width: 90%;
-    text-align: center;
-    border: 2px solid var(--gold);
-}
-
-.mode-row {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin: 16px 0;
-    flex-wrap: wrap;
-}
-
-.mode-btn {
-    padding: 12px 20px;
-    border: 1px solid var(--maroon);
-    background: #ffffff;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.mode-btn.selected {
-    background: var(--maroon);
-    color: var(--cream);
+.btn-secondary:hover, .session-btn:hover {
+  background: rgba(245, 158, 11, 0.25);
+  border-color: var(--gold);
+  transform: translateY(-1px);
 }
 
 .link-btn {
-    background: none;
-    border: none;
-    text-decoration: underline;
-    cursor: pointer;
-    margin-top: 10px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  text-decoration: underline;
+  padding: 0;
+  cursor: pointer;
 }
 
-
-/* ================================
-   Toast
-   ================================ */
-
-.toast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--maroon);
-    color: var(--cream);
-    padding: 12px 22px;
-    border-radius: 6px;
-    z-index: 20;
+.link-btn:hover {
+  color: var(--gold);
 }
 
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+}
 
-/* ================================
-   Commission Stepper
-   ================================ */
+/* ==========================================================================
+   Glassmorphic Cards
+   ========================================================================== */
 
+.card, .artist-card, .artwork-card, .review-card, .bid-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--bg-card-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover, .artist-card:hover, .artwork-card:hover, .bid-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ==========================================================================
+   Flowchart Specific Components
+   ========================================================================== */
+
+/* Step Progress Bar */
 .stepper {
-    display: flex;
-    gap: 12px;
-    margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 30px 0 40px;
+  overflow-x: auto;
+  padding-bottom: 8px;
 }
 
 .step {
-    flex: 1;
-    padding: 12px;
-    text-align: center;
-    border: 1px solid var(--gold);
-    opacity: 0.4;
+  flex: 1;
+  min-width: 120px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 10px 6px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
 }
 
 .step.on {
-    opacity: 1;
-    background: var(--amber);
-    color: var(--maroon);
-    font-weight: 600;
+  background: linear-gradient(135deg, rgba(217, 93, 57, 0.3), rgba(245, 158, 11, 0.3));
+  border-color: var(--gold);
+  color: var(--gold);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
 }
 
-
-/* ================================
-   Forms
-   ================================ */
-
-form label {
-    display: block;
-    margin: 12px 0 4px;
+.step.completed {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+  color: #10b981;
 }
 
-form input,
-form select,
-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--gold);
-    font: inherit;
-    box-sizing: border-box;
+/* Story Card with Interactive Hotspot Dots */
+.story-card-container {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--gold);
+  background: #000;
 }
 
+.story-card-img {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+}
 
-/* ================================
-   Discover Page
-   ================================ */
+.dot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid #ffffff;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.8);
+  animation: pulse-dot 2s infinite;
+}
 
+.dot.active {
+  background: var(--terracotta);
+  border-color: #fff;
+  transform: translate(-50%, -50%) scale(1.25);
+  animation: none;
+}
+
+@keyframes pulse-dot {
+  0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.8); }
+  70% { box-shadow: 0 0 0 16px rgba(245, 158, 11, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
+.hotspot-tooltip {
+  margin-top: 16px;
+  background: rgba(30, 41, 59, 0.95);
+  border-left: 4px solid var(--gold);
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--amber);
+  min-height: 60px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* 2 Bids Comparison Layout */
+.bids-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.bid-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bid-card.selected-bid {
+  border: 2px solid #10b981;
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.bid-price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin: 12px 0;
+}
+
+/* Search Box */
 #discover-section {
-    margin-bottom: 30px;
+  display: flex;
+  gap: 12px;
+  max-width: 650px;
+  margin-bottom: 40px;
 }
 
 #discover-search-input {
-    width: 300px;
-    max-width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    box-sizing: border-box;
+  flex: 1;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--bg-card-border);
+  border-radius: var(--radius-sm);
+  padding: 14px 20px;
+  color: var(--text-main);
+  font-size: 1rem;
 }
 
-#discover-search-button {
-    padding: 10px 18px;
-    margin-left: 5px;
-    font-size: 16px;
-    cursor: pointer;
+#discover-search-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 12px var(--gold-glow);
 }
 
-#discover-results {
-    display: flex;
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+label {
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: -8px;
+}
+
+input, select, textarea {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--bg-card-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.modal-box {
+  background: var(--bg-dark);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav, .nav {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .nav-links {
     flex-wrap: wrap;
-    gap: 25px;
-}
-
-
-/* ================================
-   Responsive Design
-   ================================ */
-
-@media (max-width: 700px) {
-
-    nav {
-        padding: 15px 20px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-    nav a {
-        margin-right: 12px;
-    }
-
-    .nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .nav .coins {
-        margin-left: 0;
-    }
-
-    main {
-        padding: 25px 20px;
-    }
-
-    h1 {
-        font-size: 32px;
-    }
-
-    h2 {
-        font-size: 26px;
-    }
-
-    .artist-hero {
-        grid-template-columns: 1fr;
-    }
-
-    #artist-list,
-    #artwork-list,
-    #review-list,
-    #discover-results {
-        flex-direction: column;
-    }
-
-    .artist-card,
-    .artwork-card,
-    .review-card {
-        width: 100%;
-    }
-
-    .portfolio {
-        grid-template-columns: 1fr;
-    }
-
-    #discover-search-input {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    #discover-search-button {
-        margin-left: 0;
-    }
+    gap: 12px;
+  }
+  #discover-section {
+    flex-direction: column;
+  }
+  h1 {
+    font-size: 2.1rem;
+  }
 }
