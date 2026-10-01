@@ -1,13 +1,13 @@
 /* ==========================================================================
-   KALASETU - Global Product Detail Modal & Story Card Explorer Component
+   KALASETU - Global Product Detail Modal & 2-Step Payment Checkout Component
    ========================================================================== */
 
 (function () {
-  // Inject Modal HTML into DOM if not present
   document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('ks-product-modal')) return;
 
     const modalHTML = `
+      <!-- 1. PRODUCT DETAIL & STORY CARD MODAL -->
       <div id="ks-product-modal" class="modal hidden" style="z-index: 1200;">
         <div class="modal-box" style="max-width: 750px; width: 95%; text-align: left; max-height: 90vh; overflow-y: auto;">
           <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
@@ -41,21 +41,70 @@
             </div>
           </div>
 
-          <!-- ACTION BUTTONS: BUY ARTWORK (SIMULATION) & LIVE SESSION -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 16px;">
-            <button class="btn btn-primary" id="modal-buy-btn" style="justify-content: center; font-size: 1rem; padding: 14px;">
-              🛒 BUY ARTWORK (Simulate Order) &rarr;
-            </button>
-            <button class="btn btn-secondary" id="modal-session-btn" style="justify-content: center; font-size: 1rem; padding: 14px;">
-              📹 BOOK LIVE WORKSHOP SESSION &rarr;
-            </button>
+          <!-- ACTION BUTTONS: PROCEED TO BUY & LIVE SESSION -->
+          <div style="background: rgba(15,23,42,0.9); border: 1px solid var(--bg-card-border); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+              <div>
+                <div style="font-weight: 600; color: var(--text-main); font-size: 1.05rem;">Do you want to purchase this artwork?</div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 2px;">Review details above, then click to select payment method.</p>
+              </div>
+              <button class="btn btn-primary" id="modal-buy-btn" style="padding: 12px 28px; font-size: 1rem;">
+                🛒 Proceed to Buy & Payment &rarr;
+              </button>
+            </div>
           </div>
 
-          <div style="text-align: center; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 12px;">
+            <button class="btn btn-secondary" id="modal-session-btn" style="font-size: 0.9rem;">
+              📹 Book Live Session with Artisan
+            </button>
             <a href="#" id="modal-artist-link" class="link-btn" style="font-size: 0.95rem; color: var(--gold);">
-              👨‍🎨 View Master Artisan's Complete Profile & Story &rarr;
+              👨‍🎨 View Master Artisan's Complete Profile &rarr;
             </a>
           </div>
+        </div>
+      </div>
+
+      <!-- 2. PAYMENT CHECKOUT DIALOG -->
+      <div id="ks-payment-modal" class="modal hidden" style="z-index: 1300;">
+        <div class="modal-box" style="max-width: 500px; text-align: left;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h2 style="border: none; padding: 0; margin: 0; font-size: 1.5rem;">💳 Checkout Payment</h2>
+            <button class="link-btn" id="pay-modal-close" style="font-size: 1.1rem;">✖ Cancel</button>
+          </div>
+
+          <div style="background: rgba(15,23,42,0.9); border: 1px solid var(--bg-card-border); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="color: var(--text-muted);">Item:</span>
+              <strong style="color: var(--text-main);" id="pay-item-title">Artwork</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="color: var(--text-muted);">Artisan Direct Support:</span>
+              <strong style="color: #10b981;">100% Guaranteed</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700; color: var(--gold); border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px;">
+              <span>Total Payment:</span>
+              <span id="pay-item-price">₹0</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-weight: 600; color: var(--gold); margin-bottom: 10px;">Select Payment Method:</label>
+            <div style="display: grid; gap: 10px;">
+              <label style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--gold); padding: 12px; border-radius: var(--radius-sm); cursor: pointer;">
+                <input type="radio" name="pay-method" value="upi" checked>
+                <span>📱 UPI / Google Pay / PhonePe / Paytm</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: var(--radius-sm); cursor: pointer;">
+                <input type="radio" name="pay-method" value="card">
+                <span>💳 Credit / Debit Card / Net Banking</span>
+              </label>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="complete-pay-btn" style="width: 100%; justify-content: center; font-size: 1.1rem; padding: 14px;">
+            🔒 Complete Payment & Confirm Order &rarr;
+          </button>
         </div>
       </div>
     `;
@@ -63,12 +112,18 @@
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 
     document.getElementById('modal-close-btn').addEventListener('click', closeProductModal);
+    document.getElementById('pay-modal-close').addEventListener('click', () => {
+      document.getElementById('ks-payment-modal').classList.add('hidden');
+    });
     document.getElementById('ks-product-modal').addEventListener('click', (e) => {
       if (e.target.id === 'ks-product-modal') closeProductModal();
     });
   });
 
+  let activeModalArtwork = null;
+
   window.openProductModal = function (artwork) {
+    activeModalArtwork = artwork;
     const modal = document.getElementById('ks-product-modal');
     if (!modal) return;
 
@@ -96,11 +151,9 @@
       `).join('')}
     `;
 
-    // Set initial tooltip text
     document.getElementById('modal-hotspot-title').textContent = hotspots[0].title;
     document.getElementById('modal-hotspot-text').textContent = hotspots[0].text;
 
-    // Attach click event listeners to dots
     storyContainer.querySelectorAll('.dot').forEach(dotEl => {
       dotEl.addEventListener('click', () => {
         storyContainer.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
@@ -110,35 +163,42 @@
       });
     });
 
-    // Attach Buy Button action
-    const buyBtn = document.getElementById('modal-buy-btn');
-    buyBtn.onclick = async () => {
+    // OPEN PAYMENT CHECKOUT DIALOG WHEN BUYER CLICKS PROCEED TO BUY
+    document.getElementById('modal-buy-btn').onclick = () => {
       closeProductModal();
-      // Trigger order confirmation
-      if (window.triggerOrderSimulation) {
-        window.triggerOrderSimulation(artwork);
-      } else {
-        alert(`Order Placed Successfully for "${artwork.title}" (₹${artwork.price})! Earned +10 Art Coins 🪙`);
-      }
+      openPaymentModal(artwork);
     };
 
-    // Attach Session Button action
     const sessionBtn = document.getElementById('modal-session-btn');
     sessionBtn.onclick = () => {
       closeProductModal();
-      if (window.triggerSessionBooking) {
-        window.triggerSessionBooking(artwork);
-      } else {
-        window.location.href = `artist.html?id=${artwork.artistId || artwork.artist?.id || 'artist1'}`;
-      }
+      window.location.href = `artist.html?id=${artwork.artistId || artwork.artist?.id || 'artist1'}`;
     };
 
-    // Attach Artist Link
     const artistLink = document.getElementById('modal-artist-link');
     artistLink.href = `artist.html?id=${artwork.artistId || artwork.artist?.id || 'artist1'}`;
 
     modal.classList.remove('hidden');
   };
+
+  function openPaymentModal(artwork) {
+    const payModal = document.getElementById('ks-payment-modal');
+    if (!payModal) return;
+
+    document.getElementById('pay-item-title').textContent = artwork.title;
+    document.getElementById('pay-item-price').textContent = `₹${artwork.price}`;
+
+    document.getElementById('complete-pay-btn').onclick = async () => {
+      payModal.classList.add('hidden');
+      if (window.triggerOrderSimulation) {
+        window.triggerOrderSimulation(artwork);
+      } else {
+        alert(`🎉 Payment Confirmed for "${artwork.title}" (₹${artwork.price})! Earned +10 Art Coins 🪙`);
+      }
+    };
+
+    payModal.classList.remove('hidden');
+  }
 
   window.closeProductModal = function () {
     const modal = document.getElementById('ks-product-modal');

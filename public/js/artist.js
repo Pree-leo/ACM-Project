@@ -75,7 +75,7 @@ async function loadArtist() {
           <p style="color: var(--terracotta); font-weight: 600; font-size: 0.85rem; text-transform: uppercase;">${escapeHtml(currentArtist.craft)}</p>
         </div>
         
-        <!-- CLICKING PRODUCT OPENS PRODUCT STORY CARD DETAILS (NO INSTANT ORDER) -->
+        <!-- CLICKING PRODUCT OPENS PRODUCT STORY CARD DETAILS -->
         <button class="btn btn-secondary view-product-details-btn" data-artid="${w.id}" style="width: 100%; justify-content: center; margin-top: 12px; font-size: 0.9rem;">
           🔍 View Product Details & Story Card &rarr;
         </button>
@@ -176,19 +176,18 @@ function renderProductStoryCard(artist, artwork) {
       <p style="margin-top: 4px; color: var(--amber);" id="tooltip-text">${escapeHtml(hotspots[0].text)}</p>
     </div>
 
-    <!-- EXPLICIT BUY / PLACE ORDER ACTION (ORDER ONLY HAPPENS WHEN CLICKED HERE) -->
+    <!-- EXPLICIT BUY / PAYMENT ACTION -->
     <div style="background: rgba(15,23,42,0.9); border: 1px solid var(--bg-card-border); border-radius: var(--radius-sm); padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
       <div>
-        <div style="font-weight: 600; color: var(--text-main); font-size: 1.05rem;">Would you like to purchase "${escapeHtml(artwork.title)}"?</div>
+        <div style="font-weight: 600; color: var(--text-main); font-size: 1.05rem;">Do you want to purchase "${escapeHtml(artwork.title)}"?</div>
         <p style="color: var(--text-muted); font-size: 0.88rem; margin: 2px 0 0;">Includes Certificate of Authenticity & awards +10 Art Coins 🪙</p>
       </div>
       <button class="btn btn-primary" id="confirm-buy-product-btn" style="padding: 12px 28px; font-size: 1rem;">
-        🛒 Buy / Place Order (₹${artwork.price}) &rarr;
+        🛒 Proceed to Payment (₹${artwork.price}) &rarr;
       </button>
     </div>
   `;
 
-  // Attach dot hotspot clicks
   storyContainer.querySelectorAll('.dot').forEach(dotEl => {
     dotEl.addEventListener('click', () => {
       storyContainer.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
@@ -198,9 +197,15 @@ function renderProductStoryCard(artist, artwork) {
     });
   });
 
-  // EXPLICIT BUY CLICK HANDLER -> CALLS ORDER CONFIRMATION
+  // OPENS PAYMENT CHECKOUT MODAL (SELECT UPI / CARD, THEN PAY)
   document.getElementById('confirm-buy-product-btn').addEventListener('click', () => {
-    buyArtworkForProduct(artwork);
+    if (window.openProductModal) {
+      window.openProductModal(artwork);
+      // Trigger payment dialog
+      document.getElementById('modal-buy-btn')?.click();
+    } else {
+      buyArtworkForProduct(artwork);
+    }
   });
 }
 
@@ -224,6 +229,11 @@ async function buyArtworkForProduct(artwork) {
     console.error('Error buying artwork:', err);
   }
 }
+
+// Order simulation trigger used by product-modal.js
+window.triggerOrderSimulation = function(artwork) {
+  buyArtworkForProduct(artwork);
+};
 
 async function loadCoins() {
   try {
