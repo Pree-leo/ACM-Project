@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KalaSetu - Artist</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="index.html">KalaSetu</a>
+
+        <div>
+            <a href="index.html">Home</a>
+
+            <a href="discover.html">Discover</a>
+
+            <span>
+                Art Coins:
+                <strong id="art-coins">0</strong>
+            </span>
+        </div>
+    </nav>
+
+
+    <!-- Main Artist Page -->
+    <main id="artist-page">
+
+        <!-- Artist Information -->
+        <section id="artist-info">
+            <!-- Artist details will be loaded by artist.js -->
+        </section>
+
+
+        <!-- Artworks -->
+        <section id="artworks">
+
+            <h2>Artworks</h2>
+
+            <div id="artwork-list">
+                <!-- Artwork cards will be loaded by artist.js -->
+            </div>
+
+        </section>
+
+
+        <!-- Reviews -->
+        <section id="reviews">
+
+            <h2>Reviews</h2>
+
+            <div id="review-list">
+                <!-- Review cards will be loaded by artist.js -->
+            </div>
+
+        </section>
+
+
+        <!-- Purchase Section -->
+        <section id="purchase-section">
+
+            <p>
+                Purchased:
+                <strong id="bought-count">0</strong>
+            </p>
+
+            <button
+                class="buy-btn"
+                id="buy-button">
+                Buy Artwork
+            </button>
+
+        </section>
+
+
+        <!-- Session Section -->
+        <section id="session-section">
+
+            <h2>Connect with the Artist</h2>
+
+            <!-- Session buttons are generated dynamically
+                 by artist.js -->
+
+        </section>
+
+    </main>
+
+
+    <!-- Artist JavaScript -->
+    <script src="js/artist.js"></script>
+
+</body>
+
+</html>
