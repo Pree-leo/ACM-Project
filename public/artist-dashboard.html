@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>KalaSetu - Artist Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="nav">
+
+        <a href="artist-dashboard.html">
+            <strong>KalaSetu</strong>
+        </a>
+
+        <a href="artist-dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="buyer.html">
+            Buyer Marketplace
+        </a>
+
+        <a href="index.html">
+            Switch Role
+        </a>
+
+        <span class="coins">
+            Artist Portal
+        </span>
+
+    </nav>
+
+
+    <main>
+
+        <!-- =========================================
+             ARTIST ACCESS
+        ========================================== -->
+
+        <section id="artist-access">
+
+            <h1>Artist Portal</h1>
+
+            <p>
+                Sign in to manage your KalaSetu artist profile,
+                or create a new artist account.
+            </p>
+
+
+            <!-- Sign In -->
+            <div id="artist-login-section">
+
+                <h2>Artist Sign In</h2>
+
+                <form id="artist-login-form">
+
+                    <label for="login-email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="login-email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+
+                    <label for="login-password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="login-password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="buy-btn"
+                    >
+                        Sign In
+                    </button>
+
+                </form>
+
+
+                <p id="login-message"></p>
+
+
+                <p>
+                    New to KalaSetu?
+                    <button
+                        type="button"
+                        class="link-btn"
+                        id="show-register-button"
+                    >
+                        Create New Artist Account
+                    </button>
+                </p>
+
+            </div>
+
+
+            <!-- New Artist Registration -->
+            <div
+                id="artist-register-section"
+                class="hidden"
+            >
+
+                <h2>New Artist Registration</h2>
+
+                <p>
+                    Create your artist profile and join
+                    the KalaSetu marketplace.
+                </p>
+
+
+                <form id="artist-register-form">
+
+                    <label for="register-name">
+                        Artist Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="register-name"
+                        placeholder="Enter your artist name"
+                        required
+                    >
+
+
+                    <label for="register-email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="register-email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+
+                    <label for="register-password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="register-password"
+                        placeholder="Create a password"
+                        required
+                    >
+
+
+                    <label for="register-craft">
+                        Craft / Art Form
+                    </label>
+
+                    <input
+                        type="text"
+                        id="register-craft"
+                        placeholder="Example: Madhubani Painting"
+                        required
+                    >
+
+
+                    <label for="register-region">
+                        Region
+                    </label>
+
+                    <input
+                        type="text"
+                        id="register-region"
+                        placeholder="Example: Bihar, India"
+                        required
+                    >
+
+
+                    <label for="register-story">
+                        Artist Story
+                    </label>
+
+                    <textarea
+                        id="register-story"
+                        rows="5"
+                        placeholder="Tell buyers about your artistic journey..."
+                        required
+                    ></textarea>
+
+
+                    <label>
+                        Available Session Modes
+                    </label>
+
+
+                    <div>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                id="register-video"
+                                value="video"
+                            >
+                            Video Session
+                        </label>
+
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                id="register-inperson"
+                                value="inperson"
+                            >
+                            In-Person Session
+                        </label>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="buy-btn"
+                    >
+                        Create Artist Account
+                    </button>
+
+                </form>
+
+
+                <p id="register-message"></p>
+
+
+                <button
+                    type="button"
+                    class="link-btn"
+                    id="show-login-button"
+                >
+                    Already have an account? Sign In
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             DASHBOARD
+        ========================================== -->
+
+        <section
+            id="dashboard-section"
+            class="hidden"
+        >
+
+            <h1>Artist Dashboard</h1>
+
+            <p id="welcome-message"></p>
+
+
+            <!-- Logout -->
+            <button
+                type="button"
+                class="link-btn"
+                id="logout-button"
+            >
+                Sign Out
+            </button>
+
+
+            <!-- Artist Selector -->
+            <section>
+
+                <h2>Select Artist Profile</h2>
+
+                <select id="artist-selector">
+
+                    <option value="">
+                        Loading artists...
+                    </option>
+
+                </select>
+
+            </section>
+
+
+            <!-- Artist Profile -->
+            <section id="dashboard-profile">
+
+                <h2>My Profile</h2>
+
+                <div id="profile-content">
+
+                    <p>
+                        Select an artist to view the profile.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- Portfolio -->
+            <section id="dashboard-portfolio">
+
+                <h2>My Portfolio</h2>
+
+                <div
+                    id="portfolio-content"
+                    class="portfolio"
+                >
+
+                    <p>
+                        Select an artist to view the portfolio.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- Session Availability -->
+            <section id="dashboard-sessions">
+
+                <h2>Session Availability</h2>
+
+                <p>
+                    These are the ways buyers can connect
+                    with the artist.
+                </p>
+
+                <div id="session-content">
+
+                    <p>
+                        Select an artist to view session options.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- Commission Requests -->
+            <section id="dashboard-commissions">
+
+                <h2>Commission Requests</h2>
+
+                <div id="commission-content">
+
+                    <p>
+                        Commission requests from buyers
+                        will appear here.
+                    </p>
+
+                    <p>
+                        No pending requests yet.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/main.js"></script>
+
+
+    <script>
+
+        /*
+         * =========================================
+         * ELEMENTS
+         * =========================================
+         */
+
+        const loginSection =
+            document.getElementById(
+                'artist-login-section'
+            );
+
+        const registerSection =
+            document.getElementById(
+                'artist-register-section'
+            );
+
+        const dashboardSection =
+            document.getElementById(
+                'dashboard-section'
+            );
+
+        const loginForm =
+            document.getElementById(
+                'artist-login-form'
+            );
+
+        const registerForm =
+            document.getElementById(
+                'artist-register-form'
+            );
+
+        const loginMessage =
+            document.getElementById(
+                'login-message'
+            );
+
+        const registerMessage =
+            document.getElementById(
+                'register-message'
+            );
+
+        const artistSelector =
+            document.getElementById(
+                'artist-selector'
+            );
+
+        const profileContent =
+            document.getElementById(
+                'profile-content'
+            );
+
+        const portfolioContent =
+            document.getElementById(
+                'portfolio-content'
+            );
+
+        const sessionContent =
+            document.getElementById(
+                'session-content'
+            );
+
+        const welcomeMessage =
+            document.getElementById(
+                'welcome-message'
+            );
+
+
+        let artists = [];
+
+
+        /*
+         * =========================================
+         * LOCAL ARTIST ACCOUNTS
+         * =========================================
+         */
+
+        function getRegisteredArtists() {
+
+            const stored =
+                localStorage.getItem(
+                    'ks_registered_artists'
+                );
+
+            if (!stored) {
+                return [];
+            }
+
+            try {
+
+                return JSON.parse(
+                    stored
+                );
+
+            } catch (error) {
+
+                return [];
+
+            }
+
+        }
+
+
+        function saveRegisteredArtists(
+            registeredArtists
+        ) {
+
+            localStorage.setItem(
+                'ks_registered_artists',
+                JSON.stringify(
+                    registeredArtists
+                )
+            );
+
+        }
+
+
+        /*
+         * =========================================
+         * SHOW LOGIN / REGISTER
+         * =========================================
+         */
+
+        document
+            .getElementById(
+                'show-register-button'
+            )
+            .addEventListener(
+                'click',
+                function () {
+
+                    loginSection.classList.add(
+                        'hidden'
+                    );
+
+                    registerSection.classList.remove(
+                        'hidden'
+                    );
+
+                    loginMessage.textContent = '';
+
+                }
+            );
+
+
+        document
+            .getElementById(
+                'show-login-button'
+            )
+            .addEventListener(
+                'click',
+                function () {
+
+                    registerSection.classList.add(
+                        'hidden'
+                    );
+
+                    loginSection.classList.remove(
+                        'hidden'
+                    );
+
+                    registerMessage.textContent = '';
+
+                }
+            );
+
+
+        /*
+         * =========================================
+         * REGISTER NEW ARTIST
+         * =========================================
+         */
+
+        registerForm.addEventListener(
+            'submit',
+            function (event) {
+
+                event.preventDefault();
+
+
+                const name =
+                    document
+                        .getElementById(
+                            'register-name'
+                        )
+                        .value
+                        .trim();
+
+                const email =
+                    document
+                        .getElementById(
+                            'register-email'
+                        )
+                        .value
+                        .trim()
+                        .toLowerCase();
+
+                const password =
+                    document
+                        .getElementById(
+                            'register-password'
+                        )
+                        .value;
+
+                const craft =
+                    document
+                        .getElementById(
+                            'register-craft'
+                        )
+                        .value
+                        .trim();
+
+                const region =
+                    document
+                        .getElementById(
+                            'register-region'
+                        )
+                        .value
+                        .trim();
+
+                const story =
+                    document
+                        .getElementById(
+                            'register-story'
+                        )
+                        .value
+                        .trim();
+
+
+                const sessionModes = [];
+
+
+                if (
+                    document
+                        .getElementById(
+                            'register-video'
+                        )
+                        .checked
+                ) {
+
+                    sessionModes.push(
+                        'video'
+                    );
+
+                }
+
+
+                if (
+                    document
+                        .getElementById(
+                            'register-inperson'
+                        )
+                        .checked
+                ) {
+
+                    sessionModes.push(
+                        'inperson'
+                    );
+
+                }
+
+
+                const registeredArtists =
+                    getRegisteredArtists();
+
+
+                const existingArtist =
+                    registeredArtists.find(
+                        artist =>
+                            artist.email === email
+                    );
+
+
+                if (existingArtist) {
+
+                    registerMessage.textContent =
+                        'An account with this email already exists.';
+
+                    return;
+
+                }
+
+
+                const newArtist = {
+
+                    id:
+                        'new-' +
+                        Date.now(),
+
+                    name,
+
+                    email,
+
+                    password,
+
+                    craft,
+
+                    region,
+
+                    story,
+
+                    badge:
+                        'New KalaSetu Artist',
+
+                    sessionModes,
+
+                    artworks: []
+
+                };
+
+
+                registeredArtists.push(
+                    newArtist
+                );
+
+
+                saveRegisteredArtists(
+                    registeredArtists
+                );
+
+
+                /*
+                 * Automatically sign in
+                 */
+                localStorage.setItem(
+                    'ks_artist_session',
+                    JSON.stringify(
+                        newArtist
+                    )
+                );
+
+
+                registerMessage.textContent =
+                    'Artist account created successfully!';
+
+
+                setTimeout(
+                    function () {
+
+                        showDashboard(
+                            newArtist
+                        );
+
+                    },
+                    500
+                );
+
+            }
+        );
+
+
+        /*
+         * =========================================
+         * ARTIST LOGIN
+         * =========================================
+         */
+
+        loginForm.addEventListener(
+            'submit',
+            function (event) {
+
+                event.preventDefault();
+
+
+                const email =
+                    document
+                        .getElementById(
+                            'login-email'
+                        )
+                        .value
+                        .trim()
+                        .toLowerCase();
+
+                const password =
+                    document
+                        .getElementById(
+                            'login-password'
+                        )
+                        .value;
+
+
+                const registeredArtists =
+                    getRegisteredArtists();
+
+
+                const artist =
+                    registeredArtists.find(
+                        item =>
+                            item.email === email &&
+                            item.password === password
+                    );
+
+
+                if (!artist) {
+
+                    loginMessage.textContent =
+                        'Invalid email or password.';
+
+                    return;
+
+                }
+
+
+                localStorage.setItem(
+                    'ks_artist_session',
+                    JSON.stringify(
+                        artist
+                    )
+                );
+
+
+                loginMessage.textContent =
+                    'Sign in successful!';
+
+
+                showDashboard(
+                    artist
+                );
+
+            }
+        );
+
+
+        /*
+         * =========================================
+         * SHOW DASHBOARD
+         * =========================================
+         */
+
+        function showDashboard(
+            loggedInArtist
+        ) {
+
+            loginSection.classList.add(
+                'hidden'
+            );
+
+            registerSection.classList.add(
+                'hidden'
+            );
+
+            dashboardSection.classList.remove(
+                'hidden'
+            );
+
+
+            welcomeMessage.textContent =
+                `Welcome, ${loggedInArtist.name}!`;
+
+
+            loadArtists(
+                loggedInArtist
+            );
+
+        }
+
+
+        /*
+         * =========================================
+         * LOGOUT
+         * =========================================
+         */
+
+        document
+            .getElementById(
+                'logout-button'
+            )
+            .addEventListener(
+                'click',
+                function () {
+
+                    localStorage.removeItem(
+                        'ks_artist_session'
+                    );
+
+
+                    dashboardSection.classList.add(
+                        'hidden'
+                    );
+
+                    loginSection.classList.remove(
+                        'hidden'
+                    );
+
+
+                    loginForm.reset();
+
+                    registerForm.reset();
+
+                    loginMessage.textContent =
+                        'You have been signed out.';
+
+                }
+            );
+
+
+        /*
+         * =========================================
+         * LOAD ARTISTS
+         * =========================================
+         */
+
+        async function loadArtists(
+            loggedInArtist
+        ) {
+
+            try {
+
+                const response =
+                    await fetch(
+                        '/api/artists'
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        'Unable to load artists'
+                    );
+
+                }
+
+
+                const apiArtists =
+                    await response.json();
+
+
+                const registeredArtists =
+                    getRegisteredArtists();
+
+
+                /*
+                 * Combine backend artists
+                 * with newly registered artists.
+                 */
+                artists = [
+                    ...apiArtists,
+                    ...registeredArtists
+                ];
+
+
+                artistSelector.innerHTML =
+                    '<option value="">Select an artist</option>';
+
+
+                artists.forEach(
+                    artist => {
+
+                        const option =
+                            document.createElement(
+                                'option'
+                            );
+
+                        option.value =
+                            artist.id;
+
+                        option.textContent =
+                            artist.name;
+
+                        artistSelector.appendChild(
+                            option
+                        );
+
+                    }
+                );
+
+
+                /*
+                 * Automatically select
+                 * logged-in artist.
+                 */
+                if (loggedInArtist) {
+
+                    artistSelector.value =
+                        loggedInArtist.id;
+
+
+                    loadArtist(
+                        loggedInArtist.id
+                    );
+
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                /*
+                 * Even if API fails,
+                 * show locally registered artists.
+                 */
+                const registeredArtists =
+                    getRegisteredArtists();
+
+
+                artists =
+                    registeredArtists;
+
+
+                artistSelector.innerHTML =
+                    '<option value="">Select an artist</option>';
+
+
+                artists.forEach(
+                    artist => {
+
+                        const option =
+                            document.createElement(
+                                'option'
+                            );
+
+                        option.value =
+                            artist.id;
+
+                        option.textContent =
+                            artist.name;
+
+                        artistSelector.appendChild(
+                            option
+                        );
+
+                    }
+                );
+
+
+                if (loggedInArtist) {
+
+                    artistSelector.value =
+                        loggedInArtist.id;
+
+                    loadArtist(
+                        loggedInArtist.id
+                    );
+
+                }
+
+            }
+
+        }
+
+
+        /*
+         * =========================================
+         * LOAD SELECTED ARTIST
+         * =========================================
+         */
+
+        async function loadArtist(
+            artistId
+        ) {
+
+            if (!artistId) {
+
+                profileContent.innerHTML =
+                    '<p>Select an artist to view the profile.</p>';
+
+                portfolioContent.innerHTML =
+                    '<p>Select an artist to view the portfolio.</p>';
+
+                sessionContent.innerHTML =
+                    '<p>Select an artist to view session options.</p>';
+
+                return;
+
+            }
+
+
+            /*
+             * Check locally registered artists first.
+             */
+            const localArtist =
+                artists.find(
+                    artist =>
+                        artist.id === artistId
+                );
+
+
+            if (
+                localArtist &&
+                String(artistId).startsWith(
+                    'new-'
+                )
+            ) {
+
+                renderProfile(
+                    localArtist
+                );
+
+                renderPortfolio(
+                    localArtist
+                );
+
+                renderSessions(
+                    localArtist
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Otherwise load from backend.
+             */
+            try {
+
+                const response =
+                    await fetch(
+                        `/api/artists/${artistId}`
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        'Unable to load artist'
+                    );
+
+                }
+
+
+                const artist =
+                    await response.json();
+
+
+                renderProfile(
+                    artist
+                );
+
+                renderPortfolio(
+                    artist
+                );
+
+                renderSessions(
+                    artist
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                profileContent.innerHTML =
+                    '<p>Unable to load artist profile.</p>';
+
+                portfolioContent.innerHTML =
+                    '<p>Unable to load portfolio.</p>';
+
+                sessionContent.innerHTML =
+                    '<p>Unable to load session information.</p>';
+
+            }
+
+        }
+
+
+        /*
+         * =========================================
+         * RENDER PROFILE
+         * =========================================
+         */
+
+        function renderProfile(
+            artist
+        ) {
+
+            const portrait =
+                artist.portrait ||
+                (
+                    artist.artworks &&
+                    artist.artworks.length > 0
+                        ? artist.artworks[0].image
+                        : null
+                );
+
+
+            profileContent.innerHTML = `
+
+                <div class="artist-hero">
+
+                    ${
+                        portrait
+                            ? `
+                                <div>
+
+                                    <img
+                                        src="/${portrait}"
+                                        alt="${artist.name}"
+                                        class="portrait"
+                                    >
+
+                                </div>
+                            `
+                            : ''
+                    }
+
+
+                    <div>
+
+                        <h2>
+                            ${artist.name}
+                        </h2>
+
+                        <p>
+                            <strong>Craft:</strong>
+                            ${artist.craft || 'Not specified'}
+                        </p>
+
+                        <p>
+                            <strong>Region:</strong>
+                            ${artist.region || 'Not specified'}
+                        </p>
+
+                        ${
+                            artist.badge
+                                ? `
+                                    <p>
+                                        <span class="badge">
+                                            ${artist.badge}
+                                        </span>
+                                    </p>
+                                `
+                                : ''
+                        }
+
+                        ${
+                            artist.story
+                                ? `
+                                    <p>
+                                        ${artist.story}
+                                    </p>
+                                `
+                                : ''
+                        }
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /*
+         * =========================================
+         * RENDER PORTFOLIO
+         * =========================================
+         */
+
+        function renderPortfolio(
+            artist
+        ) {
+
+            if (
+                !artist.artworks ||
+                artist.artworks.length === 0
+            ) {
+
+                portfolioContent.innerHTML = `
+
+                    <p>
+                        No artworks added yet.
+                    </p>
+
+                    <p>
+                        Your portfolio can be added
+                        in the next development step.
+                    </p>
+
+                `;
+
+                return;
+
+            }
+
+
+            portfolioContent.innerHTML =
+                artist.artworks
+                    .map(
+                        artwork => {
+
+                            return `
+
+                                <article class="art-card">
+
+                                    <img
+                                        src="/${artwork.image}"
+                                        alt="${artwork.title}"
+                                    >
+
+                                    <h3>
+                                        ${artwork.title}
+                                    </h3>
+
+                                    ${
+                                        artwork.description
+                                            ? `
+                                                <p>
+                                                    ${artwork.description}
+                                                </p>
+                                            `
+                                            : ''
+                                    }
+
+                                    ${
+                                        artwork.price
+                                            ? `
+                                                <p>
+                                                    <strong>
+                                                        ₹${artwork.price}
+                                                    </strong>
+                                                </p>
+                                            `
+                                            : ''
+                                    }
+
+                                </article>
+
+                            `;
+
+                        }
+                    )
+                    .join('');
+
+        }
+
+
+        /*
+         * =========================================
+         * RENDER SESSIONS
+         * =========================================
+         */
+
+        function renderSessions(
+            artist
+        ) {
+
+            const modes =
+                artist.sessionModes || [];
+
+
+            if (modes.length === 0) {
+
+                sessionContent.innerHTML =
+                    '<p>No session modes currently available.</p>';
+
+                return;
+
+            }
+
+
+            const labels = {
+
+                video:
+                    'Video Session',
+
+                inperson:
+                    'In-Person Session'
+
+            };
+
+
+            sessionContent.innerHTML = `
+
+                <div>
+
+                    ${
+                        modes
+                            .map(
+                                mode => {
+
+                                    return `
+
+                                        <button
+                                            class="session-btn"
+                                            disabled
+                                        >
+                                            ${
+                                                labels[mode] ||
+                                                mode
+                                            }
+                                        </button>
+
+                                    `;
+
+                                }
+                            )
+                            .join('')
+                    }
+
+                </div>
+
+                <p>
+                    Buyers can use these session modes
+                    from the artist profile.
+                </p>
+
+            `;
+
+        }
+
+
+        /*
+         * =========================================
+         * ARTIST SELECTION
+         * =========================================
+         */
+
+        artistSelector.addEventListener(
+            'change',
+            function () {
+
+                loadArtist(
+                    this.value
+                );
+
+            }
+        );
+
+
+        /*
+         * =========================================
+         * CHECK EXISTING SESSION
+         * =========================================
+         */
+
+        function checkExistingSession() {
+
+            const session =
+                localStorage.getItem(
+                    'ks_artist_session'
+                );
+
+
+            if (!session) {
+
+                loginSection.classList.remove(
+                    'hidden'
+                );
+
+                dashboardSection.classList.add(
+                    'hidden'
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const artist =
+                    JSON.parse(
+                        session
+                    );
+
+
+                showDashboard(
+                    artist
+                );
+
+            } catch (error) {
+
+                localStorage.removeItem(
+                    'ks_artist_session'
+                );
+
+            }
+
+        }
+
+
+        /*
+         * =========================================
+         * START
+         * =========================================
+         */
+
+        checkExistingSession();
+
+    </script>
+
+</body>
+
+</html>

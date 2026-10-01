@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>KalaSetu - Commission</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+
+        <a href="buyer.html">
+            <strong>KalaSetu</strong>
+        </a>
+
+        <a href="buyer.html">
+            Home
+        </a>
+
+        <a href="discover.html">
+            Discover
+        </a>
+
+        <a href="commission.html">
+            Commission
+        </a>
+
+        <span class="coins">
+            Art Coins:
+            <strong id="coin-balance">100</strong>
+        </span>
+
+        <a href="index.html">
+            Switch Role
+        </a>
+
+    </nav>
+
+
+    <main>
+
+        <h1>Commission an Artist</h1>
+
+        <p>
+            Request a custom artwork directly from
+            an artist.
+        </p>
+
+
+        <!-- Commission Form -->
+        <section id="commission-form-section">
+
+            <h2>Commission Request</h2>
+
+            <form id="commission-form">
+
+                <label for="artist-select">
+                    Choose Artist
+                </label>
+
+                <select
+                    id="artist-select"
+                    required
+                >
+
+                    <option value="">
+                        Loading artists...
+                    </option>
+
+                </select>
+
+
+                <label for="buyer-name">
+                    Your Name
+                </label>
+
+                <input
+                    type="text"
+                    id="buyer-name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+
+                <label for="commission-description">
+                    What would you like the artist to create?
+                </label>
+
+                <textarea
+                    id="commission-description"
+                    rows="7"
+                    placeholder="Describe your custom artwork..."
+                    required
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    class="buy-btn"
+                >
+                    Submit Commission Request
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- Request Status -->
+        <section
+            id="commission-status-section"
+            class="hidden"
+        >
+
+            <h2>Commission Status</h2>
+
+            <div id="commission-status">
+
+                <p>
+                    Your commission request is being processed.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Demo Artist Acceptance -->
+        <section
+            id="artist-accept-section"
+            class="hidden"
+        >
+
+            <h2>Artist Response</h2>
+
+            <p>
+                Artist-side acceptance is available here
+                for the prototype demonstration.
+            </p>
+
+            <button
+                id="accept-commission-button"
+                class="buy-btn"
+            >
+                Accept Commission
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/main.js"></script>
+
+    <script src="js/commission.js"></script>
+
+</body>
+
+</html>

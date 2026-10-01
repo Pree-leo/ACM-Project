@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>KalaSetu - Buyer</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- Buyer Navigation -->
+
+    <nav class="nav">
+
+        <a href="buyer.html">
+            KalaSetu
+        </a>
+
+        <a href="buyer.html">
+            Home
+        </a>
+
+        <a href="discover.html">
+            Discover
+        </a>
+
+        <a href="commission.html">
+            Commission
+        </a>
+
+        <span class="coins">
+            🪙 Art Coins:
+            <b id="coin-balance">0</b>
+        </span>
+
+        <a href="index.html">
+            Switch Role
+        </a>
+
+    </nav>
+
+
+    <main>
+
+        <!-- Buyer Introduction -->
+
+        <section>
+
+            <p>
+                DISCOVER INDIAN CRAFT
+            </p>
+
+            <h1>
+                Discover Art.
+                Meet the Artist.
+                Support the Craft.
+            </h1>
+
+            <p>
+                Explore traditional Indian art and
+                craft directly from the artisans who
+                keep these traditions alive.
+            </p>
+
+
+            <p>
+
+                <a href="discover.html">
+                    Discover Artwork
+                </a>
+
+                &nbsp;
+
+                <a href="commission.html">
+                    Commission Custom Art
+                </a>
+
+            </p>
+
+        </section>
+
+
+        <!-- Artist Collection -->
+
+        <section>
+
+            <p>
+                MEET THE ARTISANS
+            </p>
+
+            <h2>
+                Explore Artists
+            </h2>
+
+            <p>
+                Discover the people, stories and
+                traditions behind the artwork.
+            </p>
+
+
+            <div id="artist-list">
+
+                <p>
+                    Loading artists...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Discover -->
+
+        <section>
+
+            <p>
+                DISCOVER BY FEELING
+            </p>
+
+            <h2>
+                What are you looking for?
+            </h2>
+
+            <p>
+                Search by feeling, occasion or
+                traditional art form.
+            </p>
+
+
+            <p>
+
+                <a href="discover.html">
+                    🌿 Peaceful
+                </a>
+
+                &nbsp;
+
+                <a href="discover.html">
+                    🎉 Festive
+                </a>
+
+                &nbsp;
+
+                <a href="discover.html">
+                    🌱 Nature
+                </a>
+
+                &nbsp;
+
+                <a href="discover.html">
+                    🎁 Gift
+                </a>
+
+                &nbsp;
+
+                <a href="discover.html">
+                    🪷 Traditional
+                </a>
+
+            </p>
+
+        </section>
+
+
+        <!-- Commission -->
+
+        <section>
+
+            <p>
+                CREATE SOMETHING PERSONAL
+            </p>
+
+            <h2>
+                Want something made just for you?
+            </h2>
+
+            <p>
+                Commission an artwork directly from
+                an artisan and share your own vision.
+            </p>
+
+            <a href="commission.html">
+                Start a Commission
+            </a>
+
+        </section>
+
+
+        <!-- Art Coins -->
+
+        <section>
+
+            <p>
+                KALASETU ART COINS
+            </p>
+
+            <h2>
+                Support artisans and earn Art Coins
+            </h2>
+
+            <p>
+                Your purchases and interactions with
+                artisans contribute to your Art Coin
+                balance.
+            </p>
+
+            <p>
+                🪙 Your balance:
+                <strong id="buyer-coin-balance">
+                    0
+                </strong>
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/main.js"></script>
+
+    <script>
+
+        async function loadArtists() {
+
+            const container =
+                document.getElementById(
+                    'artist-list'
+                );
+
+            try {
+
+                const response =
+                    await fetch(
+                        '/api/artists'
+                    );
+
+                if (!response.ok) {
+                    throw new Error(
+                        'Failed to load artists'
+                    );
+                }
+
+                const artists =
+                    await response.json();
+
+
+                container.innerHTML =
+                    artists.map(
+                        artist => `
+
+                            <article
+                                class="artist-card"
+                                data-artist-id="${artist.id}"
+                            >
+
+                                <h3>
+                                    ${artist.name}
+                                </h3>
+
+                                <p>
+                                    <strong>
+                                        ${artist.craft}
+                                    </strong>
+                                </p>
+
+                                <p>
+                                    📍 ${artist.region}
+                                </p>
+
+                                <p>
+                                    ${artist.story}
+                                </p>
+
+                                <a
+                                    href="artist.html?id=${artist.id}"
+                                >
+                                    View Artist
+                                </a>
+
+                            </article>
+
+                        `
+                    ).join('');
+
+
+            } catch (error) {
+
+                console.error(
+                    'Could not load artists:',
+                    error
+                );
+
+                container.innerHTML = `
+                    <p>
+                        Unable to load artists.
+                        Please try again.
+                    </p>
+                `;
+
+            }
+
+        }
+
+
+        function loadBuyerCoins() {
+
+            const balance =
+                document.getElementById(
+                    'buyer-coin-balance'
+                );
+
+            if (
+                window.KS &&
+                balance
+            ) {
+
+                balance.textContent =
+                    KS.coins.get();
+
+            }
+
+        }
+
+
+        document.addEventListener(
+            'DOMContentLoaded',
+            function () {
+
+                loadArtists();
+
+                loadBuyerCoins();
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

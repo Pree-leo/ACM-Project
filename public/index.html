@@ -1,32 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KalaSetu</title>
-    <link rel="stylesheet" href="css/style.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>KalaSetu - Welcome</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
 
 <body>
 
-    <nav>
-        <a href="index.html">KalaSetu</a>
+    <main id="role-picker">
 
-        <div>
-            <a href="index.html">Home</a>
-            <a href="discover.html">Discover</a>
-            <span>Art Coins: <strong id="art-coins">0</strong></span>
-        </div>
-    </nav>
+        <section>
 
-    <main>
-        <h1>Discover Indian Folk Art</h1>
+            <p>KALASETU</p>
 
-        <section id="artist-list">
-            <!-- Artist cards will be loaded here -->
+            <h1>
+                Preserving Heritage.
+                Connecting People.
+            </h1>
+
+            <p>
+                A digital space where traditional
+                Indian artisans meet people who want
+                to discover, support and experience
+                their craft.
+            </p>
+
         </section>
+
+
+        <section>
+
+            <h2>
+                How would you like to continue?
+            </h2>
+
+
+            <div>
+
+                <button
+                    type="button"
+                    id="buyer-role"
+                >
+
+                    <span>
+                        🛍️
+                    </span>
+
+                    <h3>
+                        I'm a Buyer
+                    </h3>
+
+                    <p>
+                        Discover traditional art,
+                        explore artisans, buy artwork
+                        and commission something
+                        personal.
+                    </p>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="artist-role"
+                >
+
+                    <span>
+                        🎨
+                    </span>
+
+                    <h3>
+                        I'm an Artist
+                    </h3>
+
+                    <p>
+                        Showcase your craft,
+                        connect with buyers,
+                        receive commissions and
+                        share your story.
+                    </p>
+
+                </button>
+
+            </div>
+
+        </section>
+
     </main>
 
-    <script src="js/app.js"></script>
+
+    <script>
+
+        document
+            .getElementById('buyer-role')
+            .addEventListener(
+                'click',
+                function () {
+
+                    window.location.href =
+                        'buyer.html';
+
+                }
+            );
+
+
+        document
+            .getElementById('artist-role')
+            .addEventListener(
+                'click',
+                function () {
+
+                    window.location.href =
+                        'artist-dashboard.html';
+
+                }
+            );
+
+    </script>
+
 </body>
+
 </html>
